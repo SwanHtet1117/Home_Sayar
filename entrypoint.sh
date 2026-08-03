@@ -1,9 +1,15 @@
 #!/bin/sh
 
-# Cache မလိုလျှင် သို့မဟုတ် error တက်ပါက အောက်ပါအတိုင်း ရေးနိုင်ပါတယ်
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+# Vendor folder မရှိသေးပါက composer package များကို သွင်းပေးမည်
+composer install --no-dev --optimize-autoloader
 
-# Apache သို့မဟုတ် PHP Server ကို စတင်စေခြင်း
+# Laravel Cache များကို ရှင်းပေးမည်
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Laravel Key မရှိသေးပါက ထုတ်ပေးမည်
+php artisan key:generate --force
+
+# Apache Server ကို စတင်ပေးမည်
 exec apache2-foreground
