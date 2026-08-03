@@ -32,6 +32,11 @@ Route::get('/parents/faq', function () {
     return view('parent.faq');
 })->name('parents.faq');
 
+// 7. Markets Page
+Route::get('/markets', function () {
+    return view('markets');
+})->name('markets');
+
 // 7. Jobs Page
 Route::get('/jobs', function () {
     return view('jobs');

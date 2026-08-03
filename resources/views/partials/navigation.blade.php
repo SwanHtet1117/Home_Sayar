@@ -33,6 +33,7 @@
                     <a href="{{ route('parents.faq') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parents.faq') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">FAQs for Parents</a>
                 </div>
             </div>
+            <a href="{{ route('markets') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('events') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Markets</a>
             <a href="{{ route('events') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('events') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Events</a>
             <a href="{{ route('blogs') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('blogs') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Blogs</a>
             <a href="{{ route('jobs') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('jobs') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Jobs</a>
