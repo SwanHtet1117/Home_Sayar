@@ -128,12 +128,18 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-600 mb-1">Teaching Subjects</label>
                             <input type="text" wire:model="teaching_subject" placeholder="Mathematics" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                        </div>
+                        </div>                        
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">သင်ကြားမှု နည်းလမ်းများ</label>
                             <p class="text-xs text-gray-500 mb-3">* သင်ကြားခဲ့သည့် အတွေ့အကြုံများနှင့် ကျောင်းသားများအား ကူညီနိုင်မည့် နည်းလမ်းများ ဖော်ပြပါ</p>
                             <textarea wire:model="experience" rows="4" placeholder="ဥပမာ - ရူပဗေဒနှင့် သင်္ချာဘာသာရပ်များကို ဆယ်တန်းအဆင့်တွင် ၅ နှစ်တာ သင်ကြားခဲ့ပါသည်။ ကျောင်းသားများအား နားလည်လွယ်ကူစေရန် ဥပမာများနှင့် ရှင်းပြသင်ကြားပေးပါသည်။" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm resize-none"></textarea>
-                        </div>  
+                        </div> 
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Teaching Video သင်ကြားမှု ဗီဒီယို</label>
+                            <p class="text-xs text-gray-500 mb-2">* youtube ပေါ်ရှိသင်ကြားမှု ဗီဒီယိုတစ်ခုကို တင်ပါ (MP4, MOV, AVI - အများဆုံး 50MB)</p>
+                            <input type="text" wire:model="teaching_video" placeholder="https://www.youtube.com/watch?v=example" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                            @error('teaching_video') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror                           
+                        </div> 
                     </div>
                 </div>
 
