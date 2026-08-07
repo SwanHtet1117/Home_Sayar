@@ -60,8 +60,16 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            // SSL/TLS ချိတ်ဆက်မှုကို မဖြစ်မနေ အတင်းသုံးခိုင်းခြင်း
+                PDO::MYSQL_ATTR_SSL_CA => (env('MYSQL_ATTR_SSL_CA') && file_exists(env('MYSQL_ATTR_SSL_CA'))) 
+                ? env('MYSQL_ATTR_SSL_CA') 
+                : null,
+                // SSL Certificate Verification ကို ကျော်ရန် (Windows Local အတွက် အထူးလိုအပ်သည်)
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                // TiDB ကဲ့သို့ Cloud DB များအတွက် SSL Mode သတ်မှတ်ခြင်း
+                1014 => false, // MYSQL_ATTR_SSL_VERIFY_SERVER_CERT Constant value
+                ]) : [],
+            
         ],
 
         'mariadb' => [
