@@ -230,26 +230,64 @@
                                 </div>
                             </div>
                         </div>
+                    </div> 
+
+                    <!-- Test Video Clip -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Teacher Video Clips
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">                            
+                            <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                                <iframe
+                                    src="{{ asset('videos/Hnin Lae Fashion Advertise_5_8_2026.mp4') }}"
+                                    class="w-full h-full rounded-lg"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    title="Video Clip">
+                                </iframe>
+                            </div>
+                            <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                                <iframe
+                                    src="{{ asset('videos/Hnin Lae Fashion Advertise_5_8_2026.mp4') }}"
+                                    class="w-full h-full rounded-lg"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    title="Video Clip">
+                                </iframe>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Teaching Video -->
-                    @if(isset($teacher) && $teacher->teaching_video)
+                    <!-- Teacher Video Clips -->
+                    @if(isset($teacher) && $teacher->video_clips)
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                             <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Teaching Video
+                            Teacher Video Clips
                         </h3>
-                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                            <iframe
-                                src="{{ $teacher->teaching_video }}"
-                                class="w-full h-full rounded-lg"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                                title="Teaching Video">
-                            </iframe>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            @foreach(json_decode($teacher->video_clips) as $clip)
+                            <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                                <iframe
+                                    src="{{ $clip }}"
+                                    class="w-full h-full rounded-lg"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    title="Video Clip">
+                                </iframe>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
                     @endif

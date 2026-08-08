@@ -186,6 +186,17 @@
                                 <p class="text-xs text-gray-500">Tracking</p>
                             </div>
                         </a>
+                        <a href="{{ route('parent.student.performance') }}" class="flex items-center p-4 bg-yellow-50 rounded-xl hover:bg-yellow-100 transition-colors duration-200">
+                            <div class="h-10 w-10 rounded-full bg-yellow-500 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Performance</p>
+                                <p class="text-xs text-gray-500">Student Reports</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
 

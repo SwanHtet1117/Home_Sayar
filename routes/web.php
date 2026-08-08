@@ -171,6 +171,11 @@ Route::get('/parent/attendance/tracking', function () {
     return view('parent.attendance_tracking');
 })->name('parent.attendance.tracking');
 
+// 21a. Parent Student Performance View
+Route::get('/parent/student/performance', function () {
+    return view('parent.student_performance');
+})->name('parent.student.performance');
+
 // 22. Teacher Dashboard
 Route::get('/teacher/dashboard', function () {
     return view('teacher.dashboard');
@@ -180,6 +185,11 @@ Route::get('/teacher/dashboard', function () {
 Route::get('/teacher/attendance/tracking', function () {
     return view('teacher.attendance_tracking');
 })->name('teacher.attendance.tracking');
+
+// 23a. Teacher Student Performance Report
+Route::get('/teacher/student/performance', function () {
+    return view('teacher.student_performance');
+})->name('teacher.student.performance');
 
 // 24. Teacher Payment Verification List
 Route::get('/teacher/payment/verification/list', function () {

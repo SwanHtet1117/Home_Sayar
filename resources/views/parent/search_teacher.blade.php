@@ -176,7 +176,7 @@
 
                     <div class="mt-6 pt-4 border-t border-gray-100">
                         <button wire:click="requestTutor(1)" class="w-full text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg text-sm">
-                            ယခုဆရာမနှင့် ဆက်သွယ်ရန် တောင်းဆိုမည်
+                            ဆရာ၏အသေးစိတ်အချက်အလက်ကိုကြည့်မည်
                         </button>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
 
                     <div class="mt-6 pt-4 border-t border-gray-100">
                         <button wire:click="requestTutor(2)" class="w-full text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg text-sm">
-                            ယခုဆရာနှင့် ဆက်သွယ်ရန် တောင်းဆိုမည်
+                            ဆရာ၏အသေးစိတ်အချက်အလက်ကိုကြည့်မည်
                         </button>
                     </div>
                 </div>

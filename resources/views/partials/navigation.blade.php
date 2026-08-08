@@ -17,6 +17,7 @@
                 <div class="fixed z-50 mt-1 hidden min-w-[400px] rounded-2xl border border-green-200 bg-white p-1 shadow-xl group-hover:block group-focus-within:block">
                     <a href="{{ route('teacher.profile.submit') }}" class="block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teacher.profile.submit') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Teacher Application Form</a>
                     <a href="{{ route('teachers.faq') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teachers.faq') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">FAQs for Teacher</a>
+                    <a href="{{ route('teacher.student.performance') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teacher.student.performance') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Student Performance Report</a>
                 </div>
             </div>
             <div class="group relative">
@@ -30,6 +31,7 @@
                     <a href="{{ route('parent.profile.create') }}" class="block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.profile.create') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Parent Application Form</a>
                     <a href="{{ route('parent.search_teacher') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.search_teacher') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Search Teachers</a>
                     <a href="{{ route('parent.teacher_request') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.teacher_request') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Request Training</a>
+                    <a href="{{ route('parent.student.performance') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.student.performance') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Student Performance</a>
                     <a href="{{ route('parents.faq') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parents.faq') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">FAQs for Parents</a>
                 </div>
             </div>
