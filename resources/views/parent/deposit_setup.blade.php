@@ -34,15 +34,25 @@
 
                 <div class="p-6 space-y-6">
                     <div class="bg-gray-50 rounded-xl p-4">
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">ငွေပမာဏ</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">သင်ကြားမှုအတွက် ငွေဖြည့်သွင်းသောအချက်အလက်များ</label>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-600 mb-1">ပမာဏ</label>
                                 <input type="text" placeholder="ဥပမာ - 50,000 ကျပ်" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1">ငွေဖြည့်သွင်းမည့် ရက်စွဲ</label>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">ငွေသွင်းည့်ရက်စွဲ</label>
                                 <input type="date" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">သင်ကြားသည့် ဆရာ</label>
+                                <input type="text" placeholder="ဥပမာ - ဆရာ အောင်မြင်" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">သင်တန်း Code နံပါတ်</label>
+                                <input type="text" placeholder="ဥပမာ - 12345" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                             </div>
                         </div>
                     </div>
@@ -76,7 +86,7 @@
 
                     <div class="flex justify-end space-x-4">
                         <button type="button" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-all duration-200">
-                            ပယ်ဖျက်ရန်
+                            Cancel
                         </button>
                         <button type="submit" class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-md hover:shadow-lg">
                             Submit Deposit

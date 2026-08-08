@@ -78,22 +78,22 @@
                     </div>
                 </div>
 
-                <!-- Completed -->
+                <!-- Total Payments -->
                 <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">ပြီးမြောက်ပြီး</p>
-                            <p class="text-3xl font-bold text-gray-800 mt-2">3</p>
+                            <p class="text-sm font-medium text-gray-500">စုစုပေါင်း ပေးဆောင်မှု</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-2">450K</p>
                         </div>
                         <div class="h-14 w-14 rounded-full bg-purple-100 flex items-center justify-center">
                             <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
                     </div>
                     <div class="mt-4 flex items-center text-sm">
-                        <span class="text-purple-600 font-semibold">အောင်မြင်</span>
-                        <span class="text-gray-500 ml-2">ဆက်သွယ်မှုများ</span>
+                        <span class="text-purple-600 font-semibold">ကျပ်</span>
+                        <span class="text-gray-500 ml-2">ပေးဆောင်ပြီး</span>
                     </div>
                 </div>
             </div>
@@ -197,6 +197,17 @@
                                 <p class="text-xs text-gray-500">Student Reports</p>
                             </div>
                         </a>
+                        <a href="{{ route('parent.deposit.setup') }}" class="flex items-center p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors duration-200">
+                            <div class="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">ပေးဆောင်မှု</p>
+                                <p class="text-xs text-gray-500">Payments</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -258,10 +269,10 @@
             </div>
 
             <!-- Recent Requests Table -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100">
+            <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 mb-8">
                 <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 flex items-center justify-between">
                     <h3 class="text-xl font-bold text-white">လတ်တလော တောင်းဆိုမှုများ</h3>
-                    <a href="/parent/profile" class="text-white text-sm hover:underline">အသစ်ထပ်ထညပ်ရန် →</a>
+                    <a href="/parent/profile" class="text-white text-sm hover:underline">အသစ်ထပ်ထည့်ရန် →</a>
                 </div>
                 <div class="p-6">
                     <table class="min-w-full divide-y divide-gray-200">
@@ -301,6 +312,89 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                                         ပယ်ဖျက်ပြီး
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payment History Table -->
+            <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100">
+                <div class="bg-gradient-to-r from-purple-500 to-indigo-600 px-6 py-4 flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-white">ပေးဆောင်မှု မှတ်တမ်း</h3>
+                    <a href="{{ route('parent.deposit.setup') }}" class="text-white text-sm hover:underline">အသစ်ထပ်ထည့်ရန် →</a>
+                </div>
+                <div class="p-6">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">ဆရာအမည်</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">ဘာသာရပ်</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">ပမာဏ</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">ရက်စွဲ</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">အခြေအနေ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-purple-50 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm">
+                                            ဦ
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900">ဦးမင်းသူ</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ရူပဗေဒ</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800">150,000 ကျပ်</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-08-01</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        ✓ ပေးဆောင်ပြီး
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-purple-50 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-sm">
+                                            ဒ
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900">ဒေါ်သီရိမောင်</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">သင်္ချာ</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800">120,000 ကျပ်</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-08-03</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        ✓ ပေးဆောင်ပြီး
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-purple-50 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 font-bold text-sm">
+                                            ဦ
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900">ဦးကျော်ဇော်</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">အင်္ဂလိပ်စာ</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800">180,000 ကျပ်</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-08-05</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        စစ်ဆေးနေသည်
                                     </span>
                                 </td>
                             </tr>

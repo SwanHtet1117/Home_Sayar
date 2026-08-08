@@ -161,8 +161,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-semibold text-gray-800">Payment Verify</p>
-                                <p class="text-xs text-gray-500">Review Requests</p>
+                                <p class="text-sm font-semibold text-gray-800">သင်တန်းလစာ</p>
+                                <p class="text-xs text-gray-500">Review Payment</p>
                             </div>
                         </a>
                         <a href="/teacher/periodic/feedback" class="flex items-center p-4 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-colors duration-200">
