@@ -29,6 +29,17 @@
                 </div>
             </div>
 
+            <div class="rounded-2xl border border-gray-100 bg-gradient-to-br from-green-50 to-emerald-50 p-6 shadow-md mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-lg font-semibold text-green-700">AA</div>
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Aye Aye Win</h3>
+                        <p class="text-sm text-slate-600">Parent account</p>
+                    </div>
+                </div>
+                <button type="button" class="mt-4 w-full rounded-lg border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-50">Upload Profile Photo</button>
+            </div>
+
             <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
                 <form class="space-y-6">
                     <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
@@ -65,6 +76,51 @@
                         <div class="mt-4">
                             <label class="mb-1 block text-sm font-medium text-slate-700">Home Address</label>
                             <textarea rows="3" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">No. 12, Hlaing Township, Yangon</textarea>
+                        </div>
+
+                        <div class="mt-4 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Division</label>
+                                <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <option value="">တိုင်း/ဒေသရွေးချယ်ပါ</option>
+                                    <option value="yangon">ရန်ကုန်တိုင်း</option>
+                                    <option value="mandalay">မန္တလေးတိုင်း</option>
+                                    <option value="bago">ပဲခူးတိုင်း</option>
+                                    <option value="ayeyarwady">ဧရာဝတီတိုင်း</option>
+                                    <option value="sagaing">စစ်ကိုင်းတိုင်း</option>
+                                    <option value="tanintharyi">တနင်္သာရီတိုင်း</option>
+                                    <option value="kachin">ကချင်ပြည်နယ်</option>
+                                    <option value="kayah">ကယားပြည်နယ်</option>
+                                    <option value="kayin">ကရင်ပြည်နယ်</option>
+                                    <option value="chin">ချင်ပြည်နယ်</option>
+                                    <option value="mon">မွန်ပြည်နယ်</option>
+                                    <option value="rakhine">ရခိုင်ပြည်နယ်</option>
+                                    <option value="shan">ရှမ်းပြည်နယ်</option>
+                                    <option value="naypyidaw">နေပြည်တော်</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Township</label>
+                                <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <option value="">မြို့နယ်ရွေးချယ်ပါ</option>
+                                    <option value="kamaryut">ကမာရွတ်</option>
+                                    <option value="hlaing">လှိုင်</option>
+                                    <option value="bahan">ဗဟန်း</option>
+                                    <option value="yankin">ရန်ကင်း</option>
+                                    <option value="mayangone">မရမ်းကုန်း</option>
+                                    <option value="thingangyun">သင်္ဃန်းကျွန်း</option>
+                                    <option value="lanmadaw">လမ်းမတော်</option>
+                                    <option value="latha">လသာ</option>
+                                    <option value="pabedan">ပန်းဘဲတန်း</option>
+                                    <option value="kyauktada">ကျောက်တံတား</option>
+                                    <option value="pazundaung">ပဇွန်တောင်</option>
+                                    <option value="dagon">ဒဂုံ</option>
+                                    <option value="northdagon">ဒဂုံမြောက်ပိုင်း</option>
+                                    <option value="southdagon">ဒဂုံတောင်ပိုင်း</option>
+                                    <option value="eastdagon">ဒဂုံအရှေ့ပိုင်း</option>
+                                    <option value="seikkan">ဆိပ်ကမ်း</option>
+                                </select>
+                            </div>
                         </div>
                     </section>
 
@@ -113,18 +169,7 @@
                     </div>
                 </form>
 
-                <aside class="space-y-6">
-                    <div class="rounded-2xl border border-gray-100 bg-gradient-to-br from-green-50 to-emerald-50 p-6 shadow-md">
-                        <div class="flex items-center gap-3">
-                            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-lg font-semibold text-green-700">AA</div>
-                            <div>
-                                <h3 class="font-semibold text-slate-900">Aye Aye Win</h3>
-                                <p class="text-sm text-slate-600">Parent account</p>
-                            </div>
-                        </div>
-                        <button type="button" class="mt-4 w-full rounded-lg border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-50">Upload Profile Photo</button>
-                    </div>
-
+                <aside class="space-y-6"> 
                     <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
                         <h3 class="font-semibold text-slate-900">Quick Tips</h3>
                         <ul class="mt-3 space-y-2 text-sm text-slate-600">
@@ -134,6 +179,7 @@
                         </ul>
                     </div>
                 </aside>
+
             </div>
         </div>
     </div>
