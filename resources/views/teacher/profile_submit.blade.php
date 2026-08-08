@@ -460,8 +460,7 @@
                 <!-- Document Uploads -->
                 <div class="bg-gray-50 rounded-xl p-4 border border-3">
                     <label class="block text-lg font-semibold text-gray-700 mb-3"> အထောက်အထားစာရွက်စာတမ်းများ</label>
-                    <p class="text-xs text-gray-500 mb-3">* NRC ကတ်ပြား၊ ဘွဲ့လက်မှတ်နှင့် အခြားသက်သေခံစာရွက်များ တင်ပေးပါ</p>
-                    
+                    <p class="text-xs text-gray-500 mb-3">* NRC ကတ်ပြား၊ ဘွဲ့လက်မှတ်နှင့် အခြားသက်သေခံစာရွက်များ တင်ပေးပါ</p>                    
                     <div class="space-y-4">
                         <!-- NRC Upload -->
                         <div class="border-2 border-dashed border-green-300 rounded-lg p-4 hover:border-green-500 transition-colors">
