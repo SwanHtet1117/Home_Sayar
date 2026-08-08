@@ -32,12 +32,12 @@ Route::get('/parents/faq', function () {
     return view('parent.faq');
 })->name('parents.faq');
 
-// 7. Markets Page
-Route::get('/markets', function () {
-    return view('markets');
-})->name('markets');
+// 7a. Marketplace Page
+Route::get('/marketplace', function () {
+    return view('marketplace');
+})->name('marketplace');
 
-// 7. Jobs Page
+// 7b. Jobs Page
 Route::get('/jobs', function () {
     return view('jobs');
 })->name('jobs');
