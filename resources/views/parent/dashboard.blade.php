@@ -204,7 +204,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-semibold text-gray-800">ပေးဆောင်မှု</p>
+                                <p class="text-sm font-semibold text-gray-800">သင်တန်းကြေး</p>
                                 <p class="text-xs text-gray-500">Payments</p>
                             </div>
                         </a>
