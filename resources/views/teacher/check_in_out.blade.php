@@ -62,7 +62,7 @@
                             <label class="block text-sm font-medium text-gray-600 mb-1">ကျောင်းသား/သူ အမည်</label>
                             <select id="studentSelect" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                 <option value="">ကျောင်းသား/သူရွေးချယ်ပါ</option>
-                                <option value="1">မောင်သူရဲ</option>
+                                <option value="1">မောင်သူရိန်</option>
                                 <option value="2">မမြတ်သူ</option>
                                 <option value="3">ကိုဇော်ဝင်း</option>
                             </select>
@@ -90,7 +90,7 @@
                             <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <p class="text-sm text-blue-800">လုံခြုံရေး အချက်အလက်: မိဘနေရပ်မှ အကွာအဝေး <span id="distance" class="font-bold">--</span> မီတာ</p>
+                            <p class="text-sm text-blue-800">လုံခြုံရေး အချက်အလက်: မိဘနေရပ်မှ အကွာအဝေး <span id="distance" class="font-bold"> -- </span> မီတာ</p>
                         </div>
                     </div>
                 </div>
@@ -128,14 +128,14 @@
                         </div>
                     </div>
 
-                    <div id="map" class="w-full h-64 rounded-lg border border-green-300 bg-gray-100"></div>
+                    <div id="map" class="w-full h-64 rounded-lg border border-green-300 bg-gray-100 relative z-0"></div>
                     <p class="text-xs text-gray-500 mt-1">မြေပုံပေါ်တွင် သင့်တည်နေရာ ပြသပါမည်</p>
                 </div>
             </div>
 
             <!-- Check-In/Check-Out Actions -->
             <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 mb-6">
-                <div class="bg-gradient-to-r from-orange-500 to-red-600 px-6 py-4">
+                <div class="bg-gradient-to-r from-yellow-500 to-red-500 px-6 py-4">
                     <h3 class="text-xl font-bold text-white">Check-In / Check-Out လုပ်ဆောင်ချက်များ</h3>
                 </div>
                 <div class="p-6">
@@ -224,6 +224,7 @@
         };
 
         function initMap() {
+            // Initialize map with teacher's default location
             map = L.map('map').setView([16.850117, 96.231454], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -283,7 +284,7 @@
             // Calculate distance from parent location
             calculateDistance();
         }
-
+        // Calculate distance between teacher's current location and parent's registered location
         function calculateDistance() {
             const parentId = document.getElementById('parentSelect').value;
             if (parentId && parentLocations[parentId] && currentLat && currentLng) {
@@ -396,7 +397,7 @@
                         <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <p class="text-sm text-green-800">လုံခြုံရေး �核查အောင်မြင်ပါသည်</p>
+                        <p class="text-sm text-green-800">လုံခြုံရေး � အောင်မြင်ပါသည်</p>
                     </div>
                 `;
             } else {
