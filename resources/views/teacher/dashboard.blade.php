@@ -165,7 +165,7 @@
                                 <p class="text-xs text-gray-500">Review Payment</p>
                             </div>
                         </a>
-                        <a href="/teacher/periodic/feedback" class="flex items-center p-4 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-colors duration-200">
+                        <a href="{{ route('teacher.feedback') }}" class="flex items-center p-4 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-colors duration-200">
                             <div class="h-10 w-10 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"></path>

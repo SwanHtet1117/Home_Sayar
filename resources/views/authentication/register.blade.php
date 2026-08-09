@@ -44,6 +44,13 @@
                         Register
                     </button>
                 </div>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-600">
+                        Already have an account?
+                        <a href="{{ route('login') }}" class="font-medium text-green-600 hover:text-green-500 transition-colors">Login here</a>
+                    </p>
+                </div>
                 </form> 
             </div> 
         </div>

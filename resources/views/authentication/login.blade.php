@@ -48,6 +48,13 @@
                             Sign in
                         </button>
                     </div>
+
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">
+                            Don't have an account?
+                            <a href="{{ route('register') }}" class="font-medium text-green-600 hover:text-green-500 transition-colors">Register here</a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>

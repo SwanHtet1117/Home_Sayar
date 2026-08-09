@@ -157,16 +157,17 @@ Route::get('/parent/teacher/acceptance/confirm', function () {
     return view('parent.teacher_acceptance_confirmation');
 })->name('parent.teacher.acceptance.confirm');
 
-// 20. Shared Periodic Feedback for Parent and Teacher
-Route::get('/parent/periodic/feedback', function () {
-    return view('feedback.periodic_feedback');
-})->name('parent.periodic.feedback');
+// 20. Teacher Feedback Form
+Route::get('/teacher/feedback', function () {
+    return view('feedback.teacher_feedback');
+})->name('teacher.feedback');
 
-Route::get('/teacher/periodic/feedback', function () {
-    return view('feedback.periodic_feedback');
-})->name('teacher.periodic.feedback');
+// 21. Parent Feedback Form
+Route::get('/parent/feedback', function () {
+    return view('feedback.parent_feedback');
+})->name('parent.feedback');
 
-// 21. Parent Attendance Tracking
+// 22. Parent Attendance Tracking
 Route::get('/parent/attendance/tracking', function () {
     return view('parent.attendance_tracking');
 })->name('parent.attendance.tracking');
