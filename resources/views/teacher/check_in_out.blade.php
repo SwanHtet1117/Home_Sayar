@@ -179,7 +179,7 @@
                     <div class="space-y-3">
                         <label class="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
                             <input type="checkbox" id="locationVerified" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
-                            <span class="text-sm text-slate-700">မိဘနေရပ်နှင့် နီးစပ်ပါသည် (500 မီတာအတွင်း)</span>
+                            <span class="text-sm text-slate-700">မိဘနေရပ်နှင့် နီးစပ်ပါသည် (250 မီတာအတွင်း)</span>
                         </label>
                         <label class="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
                             <input type="checkbox" id="safeEnvironment" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
@@ -295,7 +295,7 @@
                 document.getElementById('distance').textContent = distance.toFixed(0);
 
                 // Update safety verification
-                if (distance <= 500) {
+                if (distance <= 200) {
                     document.getElementById('locationVerified').checked = true;
                     updateSafetyStatus();
                 }
