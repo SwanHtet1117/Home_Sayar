@@ -176,6 +176,17 @@
                                 <p class="text-xs text-gray-500">Periodic Feedback</p>
                             </div>
                         </a>
+                        <a href="{{ route('teacher.check.in.out') }}" class="flex items-center p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors duration-200">
+                            <div class="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Check-In/Out</p>
+                                <p class="text-xs text-gray-500">Attendance & Safety</p>
+                            </div>
+                        </a>
                         <a href="{{ route('teacher.student.performance') }}" class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200">
                             <div class="h-10 w-10 rounded-full bg-gray-500 flex items-center justify-center mr-3">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

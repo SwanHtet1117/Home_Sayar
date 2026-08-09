@@ -182,6 +182,11 @@ Route::get('/teacher/dashboard', function () {
     return view('teacher.dashboard');
 })->name('teacher.dashboard');
 
+// 22a. Teacher Check-In/Check-Out
+Route::get('/teacher/check-in-out', function () {
+    return view('teacher.check_in_out');
+})->name('teacher.check.in.out');
+
 // 23. Teacher Attendance Tracking
 Route::get('/teacher/attendance/tracking', function () {
     return view('teacher.attendance_tracking');

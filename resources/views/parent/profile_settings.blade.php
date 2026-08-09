@@ -45,45 +45,43 @@
                     <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
                         <div class="mb-4 flex items-center justify-between">
                             <div>
-                                <h2 class="text-lg font-semibold text-slate-900">Personal Information</h2>
+                                <h2 class="text-lg font-semibold text-slate-900">ကိုယ်ရေးကိုယ်တာ အချက်အလက်များ</h2>
                                 <p class="text-sm text-slate-500">This information helps teachers and staff reach you quickly.</p>
                             </div>
                             <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Required</span>
                         </div>
 
-                        <div class="grid gap-4 md:grid-cols-2">
+                        <div class="space-y-4">
                             <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Full Name</label>
-                                <input type="text" value="Aye Aye Win" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <label class="block text-sm font-medium text-gray-600 mb-1">အမည်</label>
+                                <input type="text" value="Aye Aye Win" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                             </div>
                             <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Phone Number</label>
-                                <input type="tel" value="09-123456789" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <label class="block text-sm font-medium text-gray-600 mb-1">ဖုန်းနံပါတ်</label>
+                                <input type="tel" value="09-123456789" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                             </div>
                             <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Email Address</label>
-                                <input type="email" value="parent@example.com" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <label class="block text-sm font-medium text-gray-600 mb-1">အီးမေးလ်</label>
+                                <input type="email" value="parent@example.com" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                             </div>
                             <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Preferred Language</label>
-                                <select class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                    <option>Myanmar</option>
-                                    <option>English</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">နေရပ်လိပ်စာ</label>
+                                <textarea rows="2" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm resize-none">No. 12, Hlaing Township, Yangon</textarea>
                             </div>
                         </div>
+                    </section>
 
-                        <div class="mt-4">
-                            <label class="mb-1 block text-sm font-medium text-slate-700">Home Address</label>
-                            <textarea rows="3" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">No. 12, Hlaing Township, Yangon</textarea>
+                    <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
+                        <div class="mb-4">
+                            <h2 class="text-lg font-semibold text-slate-900">နေရာ အချက်အလက်များ</h2>
                         </div>
 
-                        <div class="mt-4 space-y-4">
+                        <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1">Division</label>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">တိုင်း/ဒေသ</label>
                                 <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                     <option value="">တိုင်း/ဒေသရွေးချယ်ပါ</option>
-                                    <option value="yangon">ရန်ကုန်တိုင်း</option>
+                                    <option value="yangon" selected>ရန်ကုန်တိုင်း</option>
                                     <option value="mandalay">မန္တလေးတိုင်း</option>
                                     <option value="bago">ပဲခူးတိုင်း</option>
                                     <option value="ayeyarwady">ဧရာဝတီတိုင်း</option>
@@ -100,11 +98,11 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1">Township</label>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">မြို့နယ်</label>
                                 <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                     <option value="">မြို့နယ်ရွေးချယ်ပါ</option>
                                     <option value="kamaryut">ကမာရွတ်</option>
-                                    <option value="hlaing">လှိုင်</option>
+                                    <option value="hlaing" selected>လှိုင်</option>
                                     <option value="bahan">ဗဟန်း</option>
                                     <option value="yankin">ရန်ကင်း</option>
                                     <option value="mayangone">မရမ်းကုန်း</option>
@@ -121,45 +119,47 @@
                                     <option value="seikkan">ဆိပ်ကမ်း</option>
                                 </select>
                             </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Latitude (လတ္တီတွဒ်)</label>
+                                    <input type="text" id="latitude" value="16.825000" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Longitude (လောင်ဂျီတွဒ်)</label>
+                                    <input type="text" id="longitude" value="96.150000" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Google Map Location</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="googleMapLocation" value="https://www.google.com/maps?q=16.825000,96.150000" class="flex-1 px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <button type="button" onclick="getCurrentLocation()" class="px-4 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                                        Use Current Location
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">Pick Your Location on Map</label>
+                                <div id="map" class="w-full h-64 rounded-lg border border-green-300 bg-gray-100"></div>
+                                <p class="text-xs text-gray-500 mt-1">Click anywhere on the map to select your location</p>
+                            </div>
                         </div>
                     </section>
 
                     <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
-                        <h2 class="text-lg font-semibold text-slate-900">Child & Family Details</h2>
-                        <p class="mt-1 text-sm text-slate-500">Add the details you want teachers to see when coordinating lessons.</p>
-
-                        <div class="mt-4 grid gap-4 md:grid-cols-2">
-                            <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Child Name</label>
-                                <input type="text" value="Moe Thant" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
-                            </div>
-                            <div>
-                                <label class="mb-1 block text-sm font-medium text-slate-700">Grade / Level</label>
-                                <input type="text" value="Grade 5" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
-                            </div>
+                        <div class="mb-4">
+                            <h2 class="text-lg font-semibold text-slate-900">အကောင့် အချက်အလက်များ</h2>
                         </div>
 
-                        <div class="mt-4">
-                            <label class="mb-1 block text-sm font-medium text-slate-700">Special Notes</label>
-                            <textarea rows="3" class="w-full rounded-lg border border-green-300 bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:border-green-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">Needs extra support in mathematics and prefers calm learning environments.</textarea>
-                        </div>
-                    </section>
-
-                    <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md">
-                        <h2 class="text-lg font-semibold text-slate-900">Communication Preferences</h2>
-                        <div class="mt-4 space-y-3">
-                            <label class="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
-                                <input type="checkbox" checked class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-700">Receive class updates by SMS</span>
-                            </label>
-                            <label class="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
-                                <input type="checkbox" checked class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-700">Receive weekly progress reports by email</span>
-                            </label>
-                            <label class="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
-                                <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-700">Allow reminders for lessons and appointments</span>
-                            </label>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">စကားဝှက်</label>
+                                <input type="password" placeholder="စကားဝှက်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">စကားဝှက် အတည်ပြုပါ</label>
+                                <input type="password" placeholder="စကားဝှက်ပြန်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                            </div>
                         </div>
                     </section>
 
@@ -184,5 +184,102 @@
         </div>
     </div>
     @include('partials.footer')
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        let map;
+        let marker;
+
+        function initMap() {
+            // Initialize map with default center (will be updated with device location if available)
+            map = L.map('map').setView([16.850117, 96.231454], 13);
+
+            // Add OpenStreetMap tiles (free, no API key required)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add click listener to map
+            map.on('click', function(event) {
+                placeMarker(event.latlng);
+            });
+
+            // Try to get device location on load
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        map.setView([lat, lng], 15);
+                        placeMarker(L.latLng(lat, lng));
+                    },
+                    function(error) {
+                        console.log('Could not get device location, using default');
+                    }
+                );
+            }
+        }
+
+        function placeMarker(location) {
+            // Remove existing marker if any
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Create new marker
+            marker = L.marker(location).addTo(map);
+
+            // Update form fields
+            const lat = location.lat;
+            const lng = location.lng;
+            
+            document.getElementById('latitude').value = lat.toFixed(6);
+            document.getElementById('longitude').value = lng.toFixed(6);
+            document.getElementById('googleMapLocation').value = `https://www.google.com/maps?q=${lat},${lng}`;
+        }
+
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showCurrentPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showCurrentPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            
+            // Update form fields
+            document.getElementById('latitude').value = latitude.toFixed(6);
+            document.getElementById('longitude').value = longitude.toFixed(6);
+            document.getElementById('googleMapLocation').value = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            
+            // Update map with current location
+            map.setView([latitude, longitude], 15);
+            placeMarker(L.latLng(latitude, longitude));
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                default:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Initialize map when page loads
+        window.onload = initMap;
+    </script>
 </body>
 </html>

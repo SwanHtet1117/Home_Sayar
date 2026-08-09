@@ -96,6 +96,30 @@
                                         <option value="seikkan">ဆိပ်ကမ်း</option>
                                     </select>
                                 </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-600 mb-1">Latitude (လတ္တီတွဒ်)</label>
+                                        <input type="text" id="latitude" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-600 mb-1">Longitude (လောင်ဂျီတွဒ်)</label>
+                                        <input type="text" id="longitude" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Google Map Location</label>
+                                    <div class="flex space-x-2">
+                                        <input type="text" id="googleMapLocation" placeholder="Click on map to pick location or paste Google Maps link" class="flex-1 px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <button type="button" onclick="getCurrentLocation()" class="px-4 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                                            Use Current Location
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Pick Your Location on Map</label>
+                                    <div id="map" class="w-full h-64 rounded-lg border border-green-300 bg-gray-100"></div>
+                                    <p class="text-xs text-gray-500 mt-1">Click anywhere on the map to select your location</p>
+                                </div>
                             </div>
                         </div>
 
@@ -140,11 +164,108 @@
             <div class="text-center mt-6">
                 <p class="text-sm text-gray-600">
                     အကောင့်ရှိပြီးသားလား? 
-                    <a href="#" class="text-green-600 hover:text-green-800 font-semibold underline">အကောင့်ဝင်ရန်</a>
+                    <a href="{{ route('login') }}" class="text-green-600 hover:text-green-800 font-semibold underline">အကောင့်ဝင်ရန်</a>
                 </p>
             </div>
         </div>
     </div>
     @include('partials.footer')
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        let map;
+        let marker;
+
+        function initMap() {
+            // Initialize map with default center (will be updated with device location if available)
+            map = L.map('map').setView([16.850117, 96.231454], 13);
+
+            // Add OpenStreetMap tiles (free, no API key required)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add click listener to map
+            map.on('click', function(event) {
+                placeMarker(event.latlng);
+            });
+
+            // Try to get device location on load
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        map.setView([lat, lng], 15);
+                        placeMarker(L.latLng(lat, lng));
+                    },
+                    function(error) {
+                        console.log('Could not get device location, using default');
+                    }
+                );
+            }
+        }
+
+        function placeMarker(location) {
+            // Remove existing marker if any
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Create new marker
+            marker = L.marker(location).addTo(map);
+
+            // Update form fields
+            const lat = location.lat;
+            const lng = location.lng;
+            
+            document.getElementById('latitude').value = lat.toFixed(6);
+            document.getElementById('longitude').value = lng.toFixed(6);
+            document.getElementById('googleMapLocation').value = `https://www.google.com/maps?q=${lat},${lng}`;
+        }
+
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showCurrentPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showCurrentPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            
+            // Update form fields
+            document.getElementById('latitude').value = latitude.toFixed(6);
+            document.getElementById('longitude').value = longitude.toFixed(6);
+            document.getElementById('googleMapLocation').value = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            
+            // Update map with current location
+            map.setView([latitude, longitude], 15);
+            placeMarker(L.latLng(latitude, longitude));
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                default:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Initialize map when page loads
+        window.onload = initMap;
+    </script>
 </body>
 </html>
