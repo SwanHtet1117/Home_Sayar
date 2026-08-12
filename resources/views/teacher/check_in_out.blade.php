@@ -219,8 +219,8 @@
         // Sample parent location data (should come from database)
         const parentLocations = {
             '1': { lat: 16.825000, lng: 96.150000, address: 'No. 12, Hlaing Township, Yangon' },
-            '2': { lat: 16.866100, lng: 96.195100, address: 'No. 45, Bahan Township, Yangon' },
-            '3': { lat: 16.850117, lng: 96.231454, address: 'No. 78, Kamaryut Township, Yangon' }
+            '2': { lat: 16.866100, lng: 96.195100, address: 'No. 45, North Dagon Township, Yangon' },
+            '3': { lat: 16.850117, lng: 96.231454, address: 'No. 78, South Dagon Township, Yangon' }
         };
 
         function initMap() {
@@ -236,7 +236,7 @@
                 placeMarker(event.latlng);
             });
         }
-
+        // Get current location using Geolocation API
         function getCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showCurrentPosition, showError);
@@ -244,7 +244,7 @@
                 alert("Geolocation is not supported by this browser.");
             }
         }
-
+        //Show current position on the map and update fields
         function showCurrentPosition(position) {
             currentLat = position.coords.latitude;
             currentLng = position.coords.longitude;
@@ -295,13 +295,13 @@
                 document.getElementById('distance').textContent = distance.toFixed(0);
 
                 // Update safety verification
-                if (distance <= 200) {
+                if (distance <= 250) {
                     document.getElementById('locationVerified').checked = true;
                     updateSafetyStatus();
                 }
             }
         }
-
+        //Calculate distance using Haversine formula
         function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
             const R = 6371e3; // Earth's radius in meters
             const φ1 = lat1 * Math.PI / 180;

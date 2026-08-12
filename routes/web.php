@@ -207,6 +207,19 @@ Route::get('/admin/attendance-verification', function () {
     return view('admin.attendance_verification');
 })->name('admin.attendance.verification');
 
+// 25. Chat System
+Route::get('/chat', function () {
+    return view('chat.index');
+})->name('chat.index');
+
+Route::get('/teacher/chat', function () {
+    return view('chat.index');
+})->name('teacher.chat');
+
+Route::get('/parent/chat', function () {
+    return view('chat.index');
+})->name('parent.chat');
+
 // 25. Admin Feedback List
 Route::get('/admin/feedback/list', function () {
     return view('admin.feedback_list');

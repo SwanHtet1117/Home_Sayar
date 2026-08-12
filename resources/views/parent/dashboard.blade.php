@@ -12,11 +12,19 @@
     @include('partials.navigation')
     <div class="p-6 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
         <div class="max-w-7xl mx-auto">
-            <div class="flex items-center mb-6">
-                <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                <h2 class="text-2xl font-bold text-gray-800">Parent Dashboard</h2>
+            <div class="flex items-center justify-between mb-6 gap-4">
+                <div class="flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <h2 class="text-2xl font-bold text-gray-800">Parent Dashboard</h2>
+                </div>
+                <button type="button" class="sos-trigger inline-flex items-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200">
+                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 0v2m0-2h.01M17.657 16.657A9 9 0 106.343 7.343a9 9 0 0011.314 9.314z"></path>
+                    </svg>
+                    SOS
+                </button>
             </div>
 
             <!-- Statistics Cards -->
@@ -206,6 +214,17 @@
                             <div>
                                 <p class="text-sm font-semibold text-gray-800">သင်တန်းကြေး</p>
                                 <p class="text-xs text-gray-500">Payments</p>
+                            </div>
+                        </a>
+                        <a href="{{ route('parent.chat') }}" class="flex items-center p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors duration-200">
+                            <div class="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Messages</p>
+                                <p class="text-xs text-gray-500">Chat with Teachers</p>
                             </div>
                         </a>
                     </div>
@@ -404,6 +423,99 @@
             </div>
         </div>
     </div>
+    <div id="parentSosModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4">
+        <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+            <div class="mb-4 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-red-500">Emergency</p>
+                    <h3 class="mt-1 text-2xl font-bold text-gray-900">One-Tap SOS</h3>
+                </div>
+                <button type="button" id="closeParentSosModal" class="rounded-full border border-gray-200 p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="rounded-xl border border-red-100 bg-red-50 p-4 text-sm text-red-700">
+                This will notify your child's teacher, school contact and emergency support immediately.
+            </div>
+
+            <div class="mt-5 space-y-3 text-sm text-gray-600">
+                <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2">
+                    <span>Safety status</span>
+                    <span class="font-semibold text-red-600">Urgent help needed</span>
+                </div>
+                <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2">
+                    <span>Contact</span>
+                    <span class="font-semibold text-gray-800">Primary guardian</span>
+                </div>
+            </div>
+
+            <div class="mt-6 flex gap-3">
+                <button type="button" id="closeParentSosModalSecondary" class="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100">Cancel</button>
+                <button type="button" id="confirmParentSos" class="flex-1 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700">Send Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="parentSosToast" class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-lg">
+        SOS alert sent to school support.
+    </div>
+
+    <button type="button" class="sos-trigger fixed bottom-6 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-red-600 text-lg font-bold text-white shadow-2xl shadow-red-300 transition hover:scale-105 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200">
+        SOS
+    </button>
+
     @include('partials.footer')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('parentSosModal');
+            const toast = document.getElementById('parentSosToast');
+            const triggerButtons = document.querySelectorAll('.sos-trigger');
+            const closeButtons = [
+                document.getElementById('closeParentSosModal'),
+                document.getElementById('closeParentSosModalSecondary')
+            ];
+            const confirmButton = document.getElementById('confirmParentSos');
+
+            const openModal = () => {
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+            };
+
+            const closeModal = () => {
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            };
+
+            triggerButtons.forEach(function (button) {
+                button.addEventListener('click', openModal);
+            });
+
+            closeButtons.forEach(function (button) {
+                if (button) {
+                    button.addEventListener('click', closeModal);
+                }
+            });
+
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function () {
+                    closeModal();
+                    if (toast) {
+                        toast.classList.remove('hidden');
+                        setTimeout(function () {
+                            toast.classList.add('hidden');
+                        }, 2500);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
