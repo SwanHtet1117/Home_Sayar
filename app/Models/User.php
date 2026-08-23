@@ -9,13 +9,18 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Concerns\HasUuids; // new insert for UUID support
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
+
 class User extends Authenticatable
-{
+{    
+    use HasUuids;
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+    protected $keyType = 'string'; // Primary key is a string (UUID)
+    public $incrementing = false;  // Not Auto increment
 
     /**
      * Get the attributes that should be cast.
