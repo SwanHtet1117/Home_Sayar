@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // 1. Home Page
@@ -76,6 +79,24 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('authentication.register');
 })->name('register');
+
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/email/verify', function () {
+        return view('authentication.verify_email');
+    })->name('verification.notice');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+    })->middleware('throttle:6,1')->name('verification.send');
+});
+
+Route::get('/email/verify/{id}/{hash}', VerifyEmailController::class)
+    ->middleware('signed')
+    ->name('verification.verify');
 
 // 15. Password Reset
 Route::get('/password/reset', function () {
@@ -229,4 +250,3 @@ Route::get('/admin/feedback/list', function () {
 Route::get('/admin/teacher/rating/list', function () {
     return view('admin.teacher_rating_list');
 })->name('admin.teacher.rating.list');
-

@@ -21,22 +21,43 @@
                 </div>
                 <form class="mt-8 space-y-6" action="{{ route('register') }}" method="POST">
                 @csrf
+                @if ($errors->any())
+                    <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700" role="alert">
+                        <ul class="list-disc space-y-1 pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="space-y-4">
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input id="name" name="name" type="text" autocomplete="name" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Full Name">
+                        <input id="name" name="name" type="text" autocomplete="name" value="{{ old('name') }}" required @error('name') aria-invalid="true" aria-describedby="name-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('name') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Full Name">
+                        @error('name')
+                            <p id="name-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
-                        <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Email address">
+                        <input id="email" name="email" type="email" autocomplete="email" value="{{ old('email') }}" required @error('email') aria-invalid="true" aria-describedby="email-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('email') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Email address">
+                        @error('email')
+                            <p id="email-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="new-password" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Password">
+                        <input id="password" name="password" type="password" autocomplete="new-password" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Password">
+                        @error('password')
+                            <p id="password-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                        <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Confirm Password">
+                        <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required @error('password_confirmation') aria-invalid="true" aria-describedby="password-confirmation-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password_confirmation') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Confirm Password">
+                        @error('password_confirmation')
+                            <p id="password-confirmation-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div>
@@ -56,5 +77,18 @@
         </div>
     </div>
     @include('partials.footer')      
+    <script>
+        document.querySelectorAll('input[aria-invalid="true"]').forEach((input) => {
+            input.addEventListener('input', () => {
+                input.classList.remove('border-red-500', 'focus:ring-red-500', 'hover:border-red-500');
+                input.classList.add('border-green-300', 'focus:ring-2', 'focus:ring-green-500', 'focus:border-transparent', 'hover:border-green-400');
+                input.removeAttribute('aria-invalid');
+                input.removeAttribute('aria-describedby');
+
+                const errorMessage = document.getElementById(`${input.id}-error`) ?? document.getElementById('password-confirmation-error');
+                errorMessage?.remove();
+            });
+        });
+    </script>
 </body>
 </html>
