@@ -92,10 +92,10 @@
                     Apply as a teacher and keep your teaching profile updated.
                 </p>
                 <p class="mt-3 text-md leading-6 text-dark-600">
-                    ဆရာအဖြစ် လျှောက်ထားရန်
+                    ဆရာအဖြစ် လျှောက်ထားရန် နှင့် ဆရာတောင်းဆိုမှုများကိုကြည့်ရန်
                 </p>
                 <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="/teacher/dashboard" class="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700">Open Dashboard</a>
+                    <a href="/admin/teacher_request_list" class="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700">View Request Teacher</a>
                     <a href="/teacher/profile/submit" class="rounded-lg border border-green-300 px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-50">Apply Now</a>
                 </div>
             </div>            
