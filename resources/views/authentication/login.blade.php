@@ -21,10 +21,19 @@
                 </div>
                 <form class="mt-8 space-y-6" action="{{ route('login') }}" method="POST">
                     @csrf
+                    @if ($errors->any())
+                        <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700" role="alert">
+                            <ul class="list-disc space-y-1 pl-5">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="space-y-4">
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
-                            <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Email address">
+                            <input id="email" name="email" type="email" autocomplete="email" value="{{ old('email') }}" required class="appearance-none relative block w-full px-4 py-3 border border-green-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400" placeholder="Email address">
                         </div>
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>

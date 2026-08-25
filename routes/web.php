@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\AdminUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -74,14 +76,17 @@ Route::get('/parent/search/teacher', function () {
 Route::get('/login', function () {
     return view('authentication.login');
 })->name('login');
+// 13a. User Authentication with Redirect
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 // 14. User Registration
 Route::get('/register', function () {
     return view('authentication.register');
 })->name('register');
-
+// 14a. User Registration Submission
 Route::post('/register', [RegisterController::class, 'store']);
-
+// 14b. User Registration Submission with Redirect
 Route::middleware('auth')->group(function () {
     Route::get('/email/verify', function () {
         return view('authentication.verify_email');
@@ -93,7 +98,7 @@ Route::middleware('auth')->group(function () {
         return back()->with('status', 'verification-link-sent');
     })->middleware('throttle:6,1')->name('verification.send');
 });
-
+// 14c. User Email Verification
 Route::get('/email/verify/{id}/{hash}', VerifyEmailController::class)
     ->middleware('signed')
     ->name('verification.verify');
@@ -152,6 +157,12 @@ Route::get('/parent/profile/create', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::patch('/admin/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('admin.users.role');
+    Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+});
 
 // 16. Parent Dashboard
 Route::get('/parent/dashboard', function () {

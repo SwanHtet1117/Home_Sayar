@@ -31,6 +31,7 @@ class RegistrationTest extends TestCase
             'name' => 'New User',
             'email' => 'new-user@example.com',
         ]);
+        $this->assertSame('parent', User::query()->firstOrFail()->role);
         $this->assertNull(User::query()->firstOrFail()->email_verified_at);
         $this->assertTrue(Hash::check('password', User::query()->firstOrFail()->password));
         Notification::assertSentTo(User::query()->firstOrFail(), VerifyEmail::class);
@@ -51,6 +52,16 @@ class RegistrationTest extends TestCase
         $response->assertRedirect(route('home'));
         $response->assertSessionHas('verified', true);
         $this->assertNotNull($user->fresh()->email_verified_at);
+    }
+
+    public function test_an_unverified_user_does_not_see_account_navigation_controls(): void
+    {
+        $user = User::factory()->unverified()->create(['name' => 'Waiting User']);
+
+        $response = $this->actingAs($user)->get(route('home'));
+
+        $response->assertDontSee('aria-label="Open account menu for Waiting User"');
+        $response->assertDontSee('onclick="openNotificationModal()"');
     }
 
     public function test_registration_rejects_an_existing_email(): void

@@ -43,7 +43,7 @@
             <a href="{{ route('jobs') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('jobs') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Jobs</a>            
             <a href="{{ route('contact.us') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('contact.us') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Contact Us</a>
              
-            @guest
+            @if (! auth()->check() || ! auth()->user()->hasVerifiedEmail())
                 <a href="{{ route('login') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('login') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Login</a>
             @else
                 <!-- notification dropdown -->
@@ -57,8 +57,8 @@
                 </div>
                 <!-- account dropdown -->
                 <div class="group relative">
-                    <button type="button" class="flex items-center rounded-full px-3 py-1 transition bg-green-500 text-white hover:bg-green-600 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); positionDropdown(this, this.nextElementSibling)">
-                        <span class="mr-2">{{ auth()->user()->name ?? 'Account' }}</span>
+                    <button type="button" aria-label="Open account menu for {{ auth()->user()->name }}" class="flex items-center rounded-full bg-green-500 px-3 py-1 text-white transition hover:bg-green-600 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); positionDropdown(this, this.nextElementSibling)">
+                        <span class="mr-2">{{ auth()->user()->name }}</span>
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 26 26">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -73,7 +73,6 @@
                         @elseif(auth()->user()->role === 'admin')
                             <a href="{{ route('admin.dashboard') }}" class="block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Dashboard</a>
                             <a href="{{ route('admin.users') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Manage Users</a>
-                            <a href="{{ route('admin.reports') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Reports</a>
                         @endif
                         <hr class="my-1 border-gray-200">
                         <form method="POST" action="{{ route('logout') }}">
@@ -82,10 +81,16 @@
                         </form>
                     </div>
                 </div>
-            @endguest
+            @endif
         </div>
     </div>
 </nav>
+
+@if (session('success') && auth()->check())
+    <div class="border-b border-green-200 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-800" role="status">
+        {{ session('success') }}
+    </div>
+@endif
 
 <script>
     function positionDropdown(button, dropdown) {

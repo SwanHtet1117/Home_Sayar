@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable; // new insert for UUID support
+use App\Models\UserRole;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'user_role_id'])]
 #[Hidden(['password', 'remember_token'])]
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -24,6 +26,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $keyType = 'string'; // Primary key is a string (UUID)
 
     public $incrementing = false;  // Not Auto increment
+
+    public function userRole(): BelongsTo
+    {
+        return $this->belongsTo(UserRole::class);
+    }
+
+    public function getRoleAttribute(): ?string
+    {
+        return $this->userRole?->role;
+    }
 
     /**
      * Get the attributes that should be cast.

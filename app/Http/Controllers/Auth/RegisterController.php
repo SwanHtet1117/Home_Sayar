@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($validated);
+        $user->userRole()->associate(UserRole::where('role', 'parent')->firstOrFail());
+        $user->save();
 
         event(new Registered($user));
         Auth::login($user);
