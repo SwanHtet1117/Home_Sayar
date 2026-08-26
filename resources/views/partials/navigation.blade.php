@@ -58,7 +58,7 @@
                 <!-- account dropdown -->
                 <div class="group relative">
                     <button type="button" aria-label="Open account menu for {{ auth()->user()->name }}" class="flex items-center rounded-full bg-green-500 px-3 py-1 text-white transition hover:bg-green-600 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); positionDropdown(this, this.nextElementSibling)">
-                        <span class="mr-2">{{ auth()->user()->name }}</span>
+                        <span class="mr-2">{{ Str::before(trim(auth()->user()->name), ' ') }}</span>
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 26 26">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
