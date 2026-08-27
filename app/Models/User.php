@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable; // new insert for UUID support
 use App\Models\UserRole;
 
@@ -30,6 +31,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function userRole(): BelongsTo
     {
         return $this->belongsTo(UserRole::class);
+    }
+
+    public function parentProfile(): HasOne
+    {
+        return $this->hasOne(ParentProfile::class);
     }
 
     public function getRoleAttribute(): ?string

@@ -86,7 +86,7 @@
     </div>
 </nav>
 
-@if (session('success') && auth()->check())
+@if (session('success') && auth()->check() && !request()->routeIs('parent.dashboard'))
     <div class="border-b border-green-200 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-800" role="status">
         {{ session('success') }}
     </div>

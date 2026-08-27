@@ -27,6 +27,15 @@
                 </button>
             </div>
 
+            @if (session('success'))
+                <div class="mb-6 flex items-center rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800 shadow-sm" role="alert">
+                    <svg class="mr-2 h-5 w-5 flex-shrink-0 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <!-- Statistics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <!-- Total Requests -->

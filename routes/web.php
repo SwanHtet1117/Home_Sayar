@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ParentProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -170,9 +171,10 @@ Route::get('/parent/dashboard', function () {
 })->name('parent.dashboard');
 
 // 17. Parent Profile Settings
-Route::get('/parent/profile/settings', function () {
-    return view('parent.profile_settings');
-})->name('parent.profile.settings');
+Route::middleware('auth')->group(function () {
+    Route::get('/parent/profile/settings', [ParentProfileController::class, 'edit'])->name('parent.profile.settings');
+    Route::put('/parent/profile/settings', [ParentProfileController::class, 'update'])->name('parent.profile.update');
+});
 
 // 18. Parent Deposit Setup
 Route::get('/parent/deposit/setup', function () {
