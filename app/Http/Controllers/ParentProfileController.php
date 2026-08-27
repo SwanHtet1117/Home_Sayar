@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ParentProfile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +17,10 @@ class ParentProfileController extends Controller
         abort_unless($request->user()->role === 'parent', 403);
 
         $profile = $request->user()->parentProfile;
+        $cities = DB::table('cities')->orderBy('name')->get();
+        $townships = DB::table('townships')->orderBy('name')->get();
 
-        return view('parent.profile_settings', compact('profile'));
+        return view('parent.profile_settings', compact('profile', 'cities', 'townships'));
     }
 
     public function update(Request $request): RedirectResponse
@@ -31,8 +34,17 @@ class ParentProfileController extends Controller
             'phone' => ['required', 'string', 'max:30'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             'address' => ['required', 'string'],
-            'region' => ['required', 'string', 'max:255'],
-            'township' => ['required', 'string', 'max:255'],
+            'region' => ['required', 'string', 'max:255', 'exists:cities,name'],
+            'township' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::exists('townships', 'name')->where(function ($query) use ($request) {
+                    $cityId = DB::table('cities')->where('name', $request->input('region'))->value('id');
+
+                    $query->where('city_id', $cityId);
+                }),
+            ],
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'google_map_location' => ['nullable', 'url', 'max:255'],

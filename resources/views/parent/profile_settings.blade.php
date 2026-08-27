@@ -102,47 +102,23 @@
 
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1">တိုင်း/ဒေသ</label>
-                                <select name="region" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                                    <option value="">တိုင်း/ဒေသရွေးချယ်ပါ</option>
+                                <label class="block text-sm font-medium text-gray-600 mb-1">မြို့</label>
+                                <select name="region" id="city" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <option value="">မြို့ရွေးချယ်ပါ</option>
                                     @php($selectedRegion = old('region', $profile?->region ?? ''))
-                                    <option value="yangon" @selected($selectedRegion === 'yangon')>ရန်ကုန်တိုင်း</option>
-                                    <option value="mandalay" @selected($selectedRegion === 'mandalay')>မန္တလေးတိုင်း</option>
-                                    <option value="bago" @selected($selectedRegion === 'bago')>ပဲခူးတိုင်း</option>
-                                    <option value="ayeyarwady" @selected($selectedRegion === 'ayeyarwady')>ဧရာဝတီတိုင်း</option>
-                                    <option value="sagaing" @selected($selectedRegion === 'sagaing')>စစ်ကိုင်းတိုင်း</option>
-                                    <option value="tanintharyi" @selected($selectedRegion === 'tanintharyi')>တနင်္သာရီတိုင်း</option>
-                                    <option value="kachin" @selected($selectedRegion === 'kachin')>ကချင်ပြည်နယ်</option>
-                                    <option value="kayah" @selected($selectedRegion === 'kayah')>ကယားပြည်နယ်</option>
-                                    <option value="kayin" @selected($selectedRegion === 'kayin')>ကရင်ပြည်နယ်</option>
-                                    <option value="chin" @selected($selectedRegion === 'chin')>ချင်ပြည်နယ်</option>
-                                    <option value="mon" @selected($selectedRegion === 'mon')>မွန်ပြည်နယ်</option>
-                                    <option value="rakhine" @selected($selectedRegion === 'rakhine')>ရခိုင်ပြည်နယ်</option>
-                                    <option value="shan" @selected($selectedRegion === 'shan')>ရှမ်းပြည်နယ်</option>
-                                    <option value="naypyidaw" @selected($selectedRegion === 'naypyidaw')>နေပြည်တော်</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{ $city->name }}" data-city-id="{{ $city->id }}" @selected($selectedRegion === $city->name)>{{ $city->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-600 mb-1">မြို့နယ်</label>
-                                <select name="township" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                <select name="township" id="township" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                     <option value="">မြို့နယ်ရွေးချယ်ပါ</option>
                                     @php($selectedTownship = old('township', $profile?->township ?? ''))
-                                    <option value="kamaryut" @selected($selectedTownship === 'kamaryut')>ကမာရွတ်</option>
-                                    <option value="hlaing" @selected($selectedTownship === 'hlaing')>လှိုင်</option>
-                                    <option value="bahan" @selected($selectedTownship === 'bahan')>ဗဟန်း</option>
-                                    <option value="yankin" @selected($selectedTownship === 'yankin')>ရန်ကင်း</option>
-                                    <option value="mayangone" @selected($selectedTownship === 'mayangone')>မရမ်းကုန်း</option>
-                                    <option value="thingangyun" @selected($selectedTownship === 'thingangyun')>သင်္ဃန်းကျွန်း</option>
-                                    <option value="lanmadaw" @selected($selectedTownship === 'lanmadaw')>လမ်းမတော်</option>
-                                    <option value="latha" @selected($selectedTownship === 'latha')>လသာ</option>
-                                    <option value="pabedan" @selected($selectedTownship === 'pabedan')>ပန်းဘဲတန်း</option>
-                                    <option value="kyauktada" @selected($selectedTownship === 'kyauktada')>ကျောက်တံတား</option>
-                                    <option value="pazundaung" @selected($selectedTownship === 'pazundaung')>ပဇွန်တောင်</option>
-                                    <option value="dagon" @selected($selectedTownship === 'dagon')>ဒဂုံ</option>
-                                    <option value="northdagon" @selected($selectedTownship === 'northdagon')>ဒဂုံမြောက်ပိုင်း</option>
-                                    <option value="southdagon" @selected($selectedTownship === 'southdagon')>ဒဂုံတောင်ပိုင်း</option>
-                                    <option value="eastdagon" @selected($selectedTownship === 'eastdagon')>ဒဂုံအရှေ့ပိုင်း</option>
-                                    <option value="seikkan" @selected($selectedTownship === 'seikkan')>ဆိပ်ကမ်း</option>
+                                    @foreach ($townships as $township)
+                                        <option value="{{ $township->name }}" data-city-id="{{ $township->city_id }}" @selected($selectedTownship === $township->name)>{{ $township->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -309,6 +285,35 @@
                     break;
             }
         }
+
+        const citySelect = document.getElementById('city');
+        const townshipSelect = document.getElementById('township');
+        // Function to filter townships based on selected city
+        function filterTownships() {
+            const cityId = citySelect.options[citySelect.selectedIndex]?.dataset.cityId;
+            let selectedTownshipIsVisible = false;
+
+            Array.from(townshipSelect.options).forEach(function(option) {
+                if (!option.value) {
+                    option.hidden = false;
+                    return;
+                }
+
+                const isVisible = option.dataset.cityId === cityId;
+                option.hidden = !isVisible;
+
+                if (isVisible && option.selected) {
+                    selectedTownshipIsVisible = true;
+                }
+            });
+
+            if (!selectedTownshipIsVisible) {
+                townshipSelect.value = '';
+            }
+        }
+
+        citySelect.addEventListener('change', filterTownships);
+        filterTownships();
 
         // Initialize map when page loads
         window.onload = initMap;
