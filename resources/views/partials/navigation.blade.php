@@ -43,8 +43,6 @@
             <a href="{{ route('jobs') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('jobs') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Jobs</a>            
             <a href="{{ route('contact.us') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('contact.us') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Contact Us</a>
             
-            <!-- မူလလိုင်း အဟောင်း: @if (! auth()->check() || ! auth()->user()->hasVerifiedEmail()) -->
-            <!-- အောက်ပါအတိုင်း ပြင်ဆင်ပါ 👇 -->
             @if (! auth()->check())
                 <a href="{{ route('login') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('login') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Login</a>
             @else
@@ -84,7 +82,6 @@
                     </div>
                 </div>
             @endif
-            
         </div>
     </div>
 </nav>
