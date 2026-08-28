@@ -105,4 +105,5 @@ Route::middleware(['web'])->group(function () {
         \Illuminate\Support\Facades\Artisan::call('optimize:clear');
         return "Cache cleared successfully!";
     });
-}
+
+});
