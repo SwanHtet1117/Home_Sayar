@@ -101,4 +101,8 @@ Route::middleware(['web'])->group(function () {
         Route::get('/chat', function () { return view('chat.index'); })->name('chat.index');
     });
 
-});
+    Route::get('/clear-cache', function() {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        return "Cache cleared successfully!";
+    });
+}
