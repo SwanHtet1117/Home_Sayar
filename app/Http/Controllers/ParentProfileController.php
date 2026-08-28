@@ -84,6 +84,6 @@ class ParentProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('parent.dashboard')->with('success', 'Parent profile updated successfully.');
+        return redirect()->route('parent.dashboard')->with('success', 'Your parent profile has been updated successfully.');
     }
 }

@@ -28,11 +28,16 @@
             </div>
 
             @if (session('success'))
-                <div class="mb-6 flex items-center rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800 shadow-sm" role="alert">
-                    <svg class="mr-2 h-5 w-5 flex-shrink-0 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    {{ session('success') }}
+                <div class="mb-6 flex items-start rounded-xl border border-green-200 border-l-4 bg-white px-4 py-4 text-green-900 shadow-md" role="status" aria-live="polite">
+                    <div class="mr-3 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
+                        <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold">Profile updated</p>
+                        <p class="mt-1 text-sm text-green-700">{{ session('success') }}</p>
+                    </div>
                 </div>
             @endif
 
