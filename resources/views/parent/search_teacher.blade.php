@@ -19,102 +19,30 @@
                     </svg>
                     ဆရာအမြန်ရှာဖွေရန်
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <select wire:model.live="filterSubject" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-green-400 shadow-sm">
                         <option value="">ဘာသာရပ်အားလုံး</option>
-
-                        <optgroup label="အခြေခံပညာ (ကျောင်းသင်ခန်းစာ)">
-                            <option value="myanmar">မြန်မာစာ (Myanmar)</option>
-                            <option value="english">အင်္ဂလိပ်စာ (English)</option>
-                            <option value="mathematics">သင်္ချာ (Mathematics)</option>
-                            <option value="chemistry">ဓာတုဗေဒ (Chemistry)</option>
-                            <option value="physics">ရူပဗေဒ (Physics)</option>
-                            <option value="biology">ဇီဝဗေဒ (Biology)</option>
-                            <option value="economics">ဘောဂဗေဒ (Economics)</option>
-                            <option value="geography">ပထဝီဝင် (Geography)</option>
-                            <option value="history">သမိုင်း (History)</option>
-                            <option value="general_science">အထွေထွေသိပ္ပံ (General Science)</option>
-                            <option value="social_studies">လူမှုရေးသိပ္ပံ (Social Studies)</option>
-                        </optgroup>
-
-                        <optgroup label="မူလတန်းအဆင့် (Grade 1 - 5)">
-                            <option value="primary_all">ဘာသာစုံ (All Subjects)</option>
-                        </optgroup>
-
-                        <optgroup label="International Curriculum">
-                            <option value="igcse">IGCSE</option>
-                            <option value="ged">GED</option>
-                            <option value="sat">SAT</option>
-                            <option value="ielts">IELTS Preparation</option>
-                        </optgroup>
-
-                        <optgroup label="ဘာသာစကား (Languages)">
-                            <option value="lang_english">General English / 4 Skills</option>
-                            <option value="lang_japanese">ဂျပန်စာ (Japanese - N5 to N1)</option>
-                            <option value="lang_chinese">တရုတ်စာ (Chinese - HSK)</option>
-                            <option value="lang_korean">ကိုရီးယားစာ (Korean)</option>
-                        </optgroup>
-
-                        <optgroup label="နည်းပညာနှင့် ကွန်ပျူတာ">
-                            <option value="comp_basic">Computer Basic & Office Use</option>
-                            <option value="comp_programming">Coding & Web Development</option>
-                            <option value="comp_design">Graphic Design & Photo Editing</option>
-                        </optgroup>
+                        @foreach ($subjects->groupBy('category_name') as $category => $categorySubjects)
+                            <optgroup label="{{ $category }}">
+                                @foreach ($categorySubjects as $subject)
+                                    <option value="{{ $subject->slug }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
                     </select>
                     
-                    <select wire:model.live="filterTownship" class="w-full px-4 py-1 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-green-400 shadow-sm">
-                        <option value="">မြို့နယ်အားလုံး (ရန်ကုန်)</option>
+                    <select id="city" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-green-400 shadow-sm">
+                        <option value="">မြို့အားလုံး</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
 
-                        <optgroup label="ဗဟိုပိုင်းနှင့် မြို့လယ်ခေါင်">
-                            <option value="latha">လသာ (Latha)</option>
-                            <option value="lanmadaw">လမ်းမတော် (Lanmadaw)</option>
-                            <option value="pabedan">ပန်းဘဲတန်း (Pabedan)</option>
-                            <option value="kyauktada">ကျောက်တံတား (Kyauktada)</option>
-                            <option value="botahtaung">ဗိုလ်တထောင် (Botahtaung)</option>
-                            <option value="pazundaung">ပုဇွန်တောင် (Pazundaung)</option>
-                            <option value="bahan">ဗဟန်း (Bahan)</option>
-                            <option value="dagon">ဒဂုံ (Dagon)</option>
-                            <option value="sanchaung">စမ်းချောင်း (Sanchaung)</option>
-                            <option value="ahlone">အလုံ (Ahlone)</option>
-                            <option value="kyimyindaing">ကြည့်မြင်တိုင် (Kyimyindaing)</option>
-                        </optgroup>
-
-                        <optgroup label="မြောက်ပိုင်းခရိုင်">
-                            <option value="kamaryut">ကမာရွတ် (Kamaryut)</option>
-                            <option value="hlaing">လှိုင် (Hlaing)</option>
-                            <option value="mayangone">မရမ်းကုန်း (Mayangone)</option>
-                            <option value="insein">အင်းစိန် (Insein)</option>
-                            <option value="mingaladon">မင်္ဂလာဒုံ (Mingaladon)</option>
-                            <option value="shwepyitha">ရွှေပြည်သာ (Shwepyitha)</option>
-                            <option value="hlaingtharya">လှိုင်သာယာ (Hlaingtharya)</option>
-                        </optgroup>
-
-                        <optgroup label="အရှေ့ပိုင်းခရိုင်">
-                            <option value="thingangyun">သင်္ဃန်းကျွန်း (Thingangyun)</option>
-                            <option value="yankin">ရန်ကင်း (Yankin)</option>
-                            <option value="tamwe">တာမွေ (Tamwe)</option>
-                            <option value="mingalataungnyunt">မင်္ဂလာတောင်ညွန့် (Mingala Taungnyunt)</option>
-                            <option value="tharkayta">သာကေတ (Thaketa)</option>
-                            <option value="dawbon">ဒေါပုံ (Dawbon)</option>
-                            <option value="south_okkalapa">တောင်ဥက္ကလာပ (South Okkalapa)</option>
-                            <option value="north_okkalapa">မြောက်ဥက္ကလာပ (North Okkalapa)</option>
-                            <option value="north_dagon">ဒဂုံမြို့သစ်မြောက်ပိုင်း (North Dagon)</option>
-                            <option value="south_dagon">ဒဂုံမြို့သစ်တောင်ပိုင်း (South Dagon)</option>
-                            <option value="east_dagon">ဒဂုံမြို့သစ်အရှေ့ပိုင်း (East Dagon)</option>
-                            <option value="seikkan_dagon">ဒဂုံမြို့သစ်ဆိပ်ကမ်း (Dagon Seikkan)</option>
-                        </optgroup>
-
-                        <optgroup label="တောင်ပိုင်းခရိုင်">
-                            <option value="dallah">ဒလ (Dala)</option>
-                            <option value="seikkyikanaungto">ဆိပ်ကြီးခနောင်တို (Seikkyi Kanaungto)</option>
-                            <option value="thanlyin">သန်လျင် (Thanlyin)</option>
-                            <option value="kyauktan">ကျောက်တန်း (Kyauktan)</option>
-                            <option value="thongwa">သုံးခွ (Thongwa)</option>
-                            <option value="kayan">ခရမ်း (Kayan)</option>
-                            <option value="twante">တွံတေး (Twante)</option>
-                            <option value="kawhmu">ကော့မှူး (Kawhmu)</option>
-                            <option value="kungyangon">ကွမ်းခြံကုန်း (Kungyangon)</option>
-                        </optgroup>
+                    <select id="township" wire:model.live="filterTownship" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-green-400 shadow-sm">
+                        <option value="">မြို့နယ်အားလုံး</option>
+                        @foreach ($townships as $township)
+                            <option value="{{ $township->name }}" data-city-id="{{ $township->city_id }}">{{ $township->name }}</option>
+                        @endforeach
                     </select>
 
                     <select wire:model.live="filterMode" class="w-full px-4 py-1 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-green-400 shadow-sm">
@@ -240,5 +168,27 @@
         </div>
     </div>
     @include('partials.footer')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const citySelect = document.getElementById('city');
+            const townshipSelect = document.getElementById('township');
+            const townshipOptions = Array.from(townshipSelect.options).slice(1);
+
+            citySelect.addEventListener('change', function () {
+                const cityId = this.value;
+
+                townshipOptions.forEach(function (option) {
+                    const isVisible = !cityId || option.dataset.cityId === cityId;
+                    option.hidden = !isVisible;
+                    option.disabled = !isVisible;
+                });
+
+                if (townshipSelect.selectedOptions[0]?.disabled) {
+                    townshipSelect.value = '';
+                    townshipSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        });
+    </script>
 </body>
 </html>

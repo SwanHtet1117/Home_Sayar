@@ -39,35 +39,28 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">ဘာသာရပ်</label>
-                                            <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                            <select name="subject" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                                 <option value="">ဘာသာရပ်ရွေးချယ်ပါ</option>
-                                                <option value="physics">ရူပဗေဒ (Physics)</option>
-                                                <option value="mathematics">သင်္ချာ (Mathematics)</option>
-                                                <option value="english">အင်္ဂလိပ်စာ (English)</option>
-                                                <option value="chemistry">ဓာတုဗေဒ (Chemistry)</option>
-                                                <option value="biology">ဇီဝဗေဒ (Biology)</option>
-                                                <option value="myanmar">မြန်မာစာ</option>
-                                                <option value="history">သမိုင်း</option>
-                                                <option value="geography">ပထဝီဝေါ</option>
-                                                <option value="economics">စီးပွားရေး</option>
+                                                @foreach ($subjects->groupBy('category_name') as $category => $categorySubjects)
+                                                    <optgroup label="{{ $category }}">
+                                                        @foreach ($categorySubjects as $subject)
+                                                            <option value="{{ $subject->slug }}">{{ $subject->name }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
                                             </select>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">ကျောင်းသား/အတန်းအဆင့်</label>
-                                    <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <select name="class" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                                 <option value="">အတန်းရွေးချယ်ပါ</option>
-                                                <option value="kg">KG</option>
-                                                <option value="grade1">Grade 1</option>
-                                                <option value="grade2">Grade 2</option>
-                                                <option value="grade3">Grade 3</option>
-                                                <option value="grade4">Grade 4</option>
-                                                <option value="grade5">Grade 5</option>
-                                                <option value="grade6">Grade 6</option>
-                                                <option value="grade7">Grade 7</option>
-                                                <option value="grade8">Grade 8</option>
-                                                <option value="grade9">Grade 9</option>
-                                                <option value="grade10">Grade 10</option>
-                                                <option value="grade11">Grade 11 (Matriculation)</option>
+                                                @foreach ($classes->groupBy('group_name') as $group => $groupClasses)
+                                                    <optgroup label="{{ $group }}">
+                                                        @foreach ($groupClasses as $schoolClass)
+                                                            <option value="{{ $schoolClass->slug }}">{{ $schoolClass->name }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
                                             </select>
                                 </div>
                                 <div class="md:col-span-2">
@@ -94,22 +87,27 @@
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">လိုအပ်သော သင်ကြားပုံစံ</label>
                                     <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                                        <option value="">ရွေးချယ်ပါ</option>
+                                        <option value="">သင်ကြားမှုပုံစံ အားလုံး</option>
                                         <option value="onsite">အိမ်တိုင်ရာရောက်</option>
-                                        <option value="online">အွန်လိုင်း</option>
-                                        <option value="both">နှစ်ခုလုံး</option>
+                                        <option value="online">Online Class</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">လိုအပ်သော မြို့</label>
+                                    <select id="request-city" name="city_id" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <option value="">မြို့ရွေးချယ်ပါ</option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">လိုအပ်သော မြို့နယ်</label>
-                                    <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                                        <option value="">ရွေးချယ်ပါ</option>
-                                        <option value="kamaryut">ကမာရွတ်</option>
-                                        <option value="hlaing">လှိုင်</option>
-                                        <option value="bahan">ဗဟန်း</option>
-                                        <option value="yankin">ရန်ကင်း</option>
-                                        <option value="dagon">ဒဂုံ</option>
-                                        <option value="thingangyun">သင်္ဃန်းကျွန်း</option>
+                                    <select id="request-township" name="township_id" disabled class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <option value="">မြို့နယ်ရွေးချယ်ပါ</option>
+                                        @foreach ($townships as $township)
+                                            <option value="{{ $township->id }}" data-city-id="{{ $township->city_id }}">{{ $township->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -181,5 +179,22 @@
         </div>
     </div>
     @include('partials.footer')
+    <script>
+        const requestCity = document.getElementById('request-city');
+        const requestTownship = document.getElementById('request-township');
+        const requestTownshipOptions = Array.from(requestTownship.options).slice(1);
+
+        requestCity.addEventListener('change', function () {
+            const cityId = this.value;
+
+            requestTownship.disabled = !cityId;
+            requestTownshipOptions.forEach(function (option) {
+                const matchesCity = option.dataset.cityId === cityId;
+                option.hidden = !matchesCity;
+                option.disabled = !matchesCity;
+            });
+            requestTownship.value = '';
+        });
+    </script>
 </body>
 </html>

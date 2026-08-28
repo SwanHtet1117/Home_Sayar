@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ParentProfileController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,18 @@ Route::middleware(['web'])->group(function () {
     Route::get('/jobs', function () { return view('jobs'); })->name('jobs');
     Route::get('/contact-us', function () { return view('contact_us'); })->name('contact.us');
     Route::get('/teacher/profile/submit', function () { return view('teacher.profile_submit'); })->name('teacher.profile.submit');
-    Route::get('/parent/search/teacher', function () { return view('parent.search_teacher'); })->name('parent.search_teacher');
+    Route::get('/parent/search/teacher', function () {
+        $subjects = DB::table('subjects')
+            ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
+            ->select('subjects.*', 'subject_categories.name as category_name')
+            ->orderBy('subject_categories.name')
+            ->orderBy('subjects.name')
+            ->get();
+        $cities = DB::table('cities')->orderBy('name')->get();
+        $townships = DB::table('townships')->orderBy('name')->get();
+
+        return view('parent.search_teacher', compact('subjects', 'cities', 'townships'));
+    })->name('parent.search_teacher');
     Route::get('/teacher/feedback', function () { return view('feedback.teacher_feedback'); })->name('teacher.feedback');
     Route::get('/parent/feedback', function () { return view('feedback.parent_feedback'); })->name('parent.feedback');
 
@@ -78,7 +90,24 @@ Route::middleware(['web'])->group(function () {
         Route::get('/parent/profile/create', function () { return view('parent.profile_create'); })->name('parent.profile.create');
         Route::get('/parent/profile/settings', [ParentProfileController::class, 'edit'])->name('parent.profile.settings');
         Route::put('/parent/profile/settings', [ParentProfileController::class, 'update'])->name('parent.profile.update');
-        Route::get('/parent/teacher_request', function () { return view('parent.teacher_request'); })->name('parent.teacher_request');
+        Route::get('/parent/teacher_request', function () {
+            $subjects = DB::table('subjects')
+                ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
+                ->select('subjects.slug', 'subjects.name', 'subject_categories.name as category_name')
+                ->orderBy('subject_categories.name')
+                ->orderBy('subjects.name')
+                ->get();
+            $classes = DB::table('classes')
+                ->join('class_groups', 'classes.group_id', '=', 'class_groups.id')
+                ->select('classes.slug', 'classes.name', 'class_groups.name as group_name')
+                ->orderBy('class_groups.sort_order')
+                ->orderBy('classes.sort_order')
+                ->get();
+            $cities = DB::table('cities')->orderBy('name')->get();
+            $townships = DB::table('townships')->orderBy('name')->get();
+
+            return view('parent.teacher_request', compact('subjects', 'classes', 'cities', 'townships'));
+        })->name('parent.teacher_request');
         Route::get('/parent/deposit/setup', function () { return view('parent.deposit_setup'); })->name('parent.deposit.setup');
         Route::get('/parent/teacher/rating', function () { return view('parent.teacher_rating'); })->name('parent.teacher.rating');
         Route::get('/parent/teacher/acceptance/confirm', function () { return view('parent.teacher_acceptance_confirmation'); })->name('parent.teacher.acceptance.confirm');
