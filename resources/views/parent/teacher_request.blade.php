@@ -124,6 +124,10 @@
                                     <label class="block text-sm font-medium text-gray-600 mb-1">ဖုန်းနံပါတ်</label>
                                     <input type="tel" placeholder="09-xxxxxxxxx" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                 </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                                    <input type="email" value="{{ old('email', auth()->user()->email ?? '') }}" readonly class="w-full px-4 py-3 rounded-lg border border-green-300 bg-gray-100 text-gray-700 cursor-not-allowed focus:outline-none shadow-sm">
+                                </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-medium text-gray-600 mb-1">နေရပ်လိပ်စာ</label>
                                     <textarea rows="2" placeholder="နေရပ်လိပ်စာ/သင်ကြားမည့်နေရာ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm resize-none"></textarea>

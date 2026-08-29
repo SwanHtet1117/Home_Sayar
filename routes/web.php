@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ParentProfileController;
+use App\Http\Controllers\TeacherProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,6 @@ Route::middleware(['web'])->group(function () {
     Route::get('/marketplace', function () { return view('marketplace'); })->name('marketplace');
     Route::get('/jobs', function () { return view('jobs'); })->name('jobs');
     Route::get('/contact-us', function () { return view('contact_us'); })->name('contact.us');
-    Route::get('/teacher/profile/submit', function () { return view('teacher.profile_submit'); })->name('teacher.profile.submit');
     Route::get('/parent/search/teacher', function () {
         $subjects = DB::table('subjects')
             ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
@@ -39,8 +39,19 @@ Route::middleware(['web'])->group(function () {
 
         return view('parent.search_teacher', compact('subjects', 'cities', 'townships'));
     })->name('parent.search_teacher');
-    Route::get('/teacher/feedback', function () { return view('feedback.teacher_feedback'); })->name('teacher.feedback');
-    Route::get('/parent/feedback', function () { return view('feedback.parent_feedback'); })->name('parent.feedback');
+    Route::middleware('auth')->group(function () {
+        Route::get('/parent/feedback', function (Request $request) {
+            abort_unless($request->user()->role === 'parent', 403, 'Only parent accounts can access the parent feedback page.');
+
+            return view('feedback.parent_feedback');
+        })->name('parent.feedback');
+
+        Route::get('/teacher/feedback', function (Request $request) {
+            abort_unless($request->user()->role === 'teacher', 403, 'Only teacher accounts can access the teacher feedback page.');
+
+            return view('feedback.teacher_feedback');
+        })->name('teacher.feedback');
+    });
 
     // 2. Authentication Routes (Guest Only)
     Route::middleware('guest')->group(function () {
@@ -108,6 +119,24 @@ Route::middleware(['web'])->group(function () {
 
             return view('parent.teacher_request', compact('subjects', 'classes', 'cities', 'townships'));
         })->name('parent.teacher_request');
+        Route::get('/teacher/profile/submit', function () {
+            $subjects = DB::table('subjects')
+                ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
+                ->select('subjects.*', 'subject_categories.name as category_name')
+                ->orderBy('subject_categories.name')
+                ->orderBy('subjects.name')
+                ->get();
+            $classes = DB::table('classes')
+                ->join('class_groups', 'classes.group_id', '=', 'class_groups.id')
+                ->select('classes.*', 'class_groups.name as group_name')
+                ->orderBy('class_groups.sort_order')
+                ->orderBy('classes.sort_order')
+                ->get();
+            $cities = DB::table('cities')->orderBy('name')->get();
+            $townships = DB::table('townships')->orderBy('name')->get();
+
+            return view('teacher.profile_submit', compact('subjects', 'classes', 'cities', 'townships'));
+        })->name('teacher.profile.submit');
         Route::get('/parent/deposit/setup', function () { return view('parent.deposit_setup'); })->name('parent.deposit.setup');
         Route::get('/parent/teacher/rating', function () { return view('parent.teacher_rating'); })->name('parent.teacher.rating');
         Route::get('/parent/teacher/acceptance/confirm', function () { return view('parent.teacher_acceptance_confirmation'); })->name('parent.teacher.acceptance.confirm');
@@ -117,6 +146,7 @@ Route::middleware(['web'])->group(function () {
 
         // Teacher Routes
         Route::get('/teacher/dashboard', function () { return view('teacher.dashboard'); })->name('teacher.dashboard');
+        Route::post('/teacher/profile/submit', [TeacherProfileController::class, 'store'])->name('teacher.profile.store');
         Route::get('/teacher/profile/detail', function () { return view('teacher.profile_detail'); })->name('teacher.profile.detail');
         Route::get('/teacher/profile/edit', function () { return view('teacher.profile_edit'); })->name('teacher.profile.edit');
         Route::get('/teacher/parent/requests', function () { return view('teacher.parent_requests'); })->name('teacher.parent.requests');

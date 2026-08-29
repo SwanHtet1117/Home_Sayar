@@ -38,6 +38,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(ParentProfile::class);
     }
 
+    public function teacherProfile(): HasOne
+    {
+        return $this->hasOne(TeacherProfile::class);
+    }
+
     public function getRoleAttribute(): ?string
     {
         return $this->userRole?->role;

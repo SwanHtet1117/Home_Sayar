@@ -19,7 +19,7 @@
                 <div class="fixed z-50 mt-1 hidden min-w-[400px] rounded-2xl border border-green-200 bg-white p-1 shadow-xl group-hover:block group-focus-within:block">
                     <a href="{{ route('teacher.profile.submit') }}" class="block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teacher.profile.submit') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Teacher Application Form</a>
                     <a href="{{ route('teachers.faq') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teachers.faq') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">FAQs for Teacher</a>
-                    <a href="{{ route('teacher.feedback') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teacher.feedback') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Feedback</a>
+                    <a href="{{ route('teacher.feedback') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('teacher.feedback') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Feedback Parent</a>
                 </div>
             </div>
             <div class="group relative">
@@ -34,7 +34,7 @@
                     <a href="{{ route('parent.search_teacher') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.search_teacher') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Search Teachers</a>
                     <a href="{{ route('parent.teacher_request') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.teacher_request') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Request Training</a>
                     <a href="{{ route('parents.faq') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parents.faq') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">FAQs for Parents</a>
-                    <a href="{{ route('parent.feedback') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.feedback') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Feedback</a>
+                    <a href="{{ route('parent.feedback') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition {{ request()->routeIs('parent.feedback') ? 'bg-green-100 text-green-700' : 'hover:bg-green-50 hover:text-green-700' }}">Feedback Teacher</a>
                 </div>
             </div>
             <a href="{{ route('marketplace') }}" class="rounded-full px-3 py-1 transition {{ request()->routeIs('marketplace') ? 'bg-green-500 text-white' : 'hover:bg-green-100 hover:text-green-700' }}">Marketplace</a>
