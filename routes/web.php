@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ParentProfileController;
 use App\Http\Controllers\TeacherProfileController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -84,7 +85,10 @@ Route::middleware(['web'])->group(function () {
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
         // Admin Routes
-        Route::get('/admin/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
+        Route::get('/admin/dashboard', function () {
+            $users = User::with('userRole')->latest()->take(5)->get();
+            return view('admin.dashboard', compact('users'));
+        })->name('admin.dashboard');
         Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users');
         Route::patch('/admin/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('admin.users.role');
         Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
