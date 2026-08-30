@@ -40,15 +40,23 @@ Route::middleware(['web'])->group(function () {
 
         return view('parent.search_teacher', compact('subjects', 'cities', 'townships'));
     })->name('parent.search_teacher');
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/parent/feedback', function (Request $request) {
-            abort_unless($request->user()->role === 'parent', 403, 'Only parent accounts can access the parent feedback page.');
+            abort_unless(
+                $request->user()->canAccessRoleFeature('parent'),
+                403,
+                'Only parent accounts can access the parent feedback page.'
+            );
 
             return view('feedback.parent_feedback');
         })->name('parent.feedback');
 
         Route::get('/teacher/feedback', function (Request $request) {
-            abort_unless($request->user()->role === 'teacher', 403, 'Only teacher accounts can access the teacher feedback page.');
+            abort_unless(
+                $request->user()->canAccessRoleFeature('teacher'),
+                403,
+                'Only teacher accounts can access the teacher feedback page.'
+            );
 
             return view('feedback.teacher_feedback');
         })->name('teacher.feedback');
@@ -85,7 +93,17 @@ Route::middleware(['web'])->group(function () {
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
         // Admin Routes
-        Route::get('/admin/dashboard', function () {
+        Route::get('/admin/dashboard', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->role === 'admin',
+                403,
+                'Only verified admin users can access the admin dashboard.'
+            );
+
             $users = User::with('userRole')->latest()->take(5)->get();
             return view('admin.dashboard', compact('users'));
         })->name('admin.dashboard');
@@ -101,11 +119,45 @@ Route::middleware(['web'])->group(function () {
         Route::get('/admin/teacher/rating/list', function () { return view('admin.teacher_rating_list'); })->name('admin.teacher.rating.list');
 
         // Parent Routes
-        Route::get('/parent/dashboard', function () { return view('parent.dashboard'); })->name('parent.dashboard');
-        Route::get('/parent/profile/create', function () { return view('parent.profile_create'); })->name('parent.profile.create');
+        Route::get('/parent/dashboard', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->role === 'parent',
+                403,
+                'Only verified parent users can access the parent dashboard.'
+            );
+
+            return view('parent.dashboard');
+        })->name('parent.dashboard');
+        Route::get('/parent/profile/create', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->canApplyForRole('parent'),
+                403,
+                'Your account must be verified before creating a parent profile.'
+            );
+
+            return view('parent.profile_create');
+        })->name('parent.profile.create');
         Route::get('/parent/profile/settings', [ParentProfileController::class, 'edit'])->name('parent.profile.settings');
         Route::put('/parent/profile/settings', [ParentProfileController::class, 'update'])->name('parent.profile.update');
-        Route::get('/parent/teacher_request', function () {
+        Route::get('/parent/teacher_request', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->canAccessRoleFeature('parent'),
+                403,
+                'Only parent accounts can request training.'
+            );
+
             $subjects = DB::table('subjects')
                 ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
                 ->select('subjects.slug', 'subjects.name', 'subject_categories.name as category_name')
@@ -123,7 +175,18 @@ Route::middleware(['web'])->group(function () {
 
             return view('parent.teacher_request', compact('subjects', 'classes', 'cities', 'townships'));
         })->name('parent.teacher_request');
-        Route::get('/teacher/profile/submit', function () {
+
+        Route::get('/teacher/profile/submit', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->canApplyForRole('teacher'),
+                403,
+                'Your account must be verified before applying as a teacher.'
+            );
+
             $subjects = DB::table('subjects')
                 ->join('subject_categories', 'subjects.category_id', '=', 'subject_categories.id')
                 ->select('subjects.*', 'subject_categories.name as category_name')
@@ -149,8 +212,20 @@ Route::middleware(['web'])->group(function () {
         Route::get('/parent/chat', function () { return view('chat.index'); })->name('parent.chat');
 
         // Teacher Routes
-        Route::get('/teacher/dashboard', function () { return view('teacher.dashboard'); })->name('teacher.dashboard');
-        Route::post('/teacher/profile/submit', [TeacherProfileController::class, 'store'])->name('teacher.profile.store');
+        Route::get('/teacher/dashboard', function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            abort_unless(
+                $request->user()->role === 'teacher',
+                403,
+                'Only verified teacher users can access the teacher dashboard.'
+            );
+
+            return view('teacher.dashboard');
+        })->name('teacher.dashboard');
+        Route::post('/teacher/profile/submit', [TeacherProfileController::class, 'store'])->middleware('verified')->name('teacher.profile.store');
         Route::get('/teacher/profile/detail', function () { return view('teacher.profile_detail'); })->name('teacher.profile.detail');
         Route::get('/teacher/profile/edit', function () { return view('teacher.profile_edit'); })->name('teacher.profile.edit');
         Route::get('/teacher/parent/requests', function () { return view('teacher.parent_requests'); })->name('teacher.parent.requests');

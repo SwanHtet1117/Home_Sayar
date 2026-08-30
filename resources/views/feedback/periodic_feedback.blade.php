@@ -21,10 +21,7 @@
                         <h2 class="text-2xl font-bold text-gray-800">Periodic Feedback</h2>
                         <p class="text-sm text-gray-500">Share your feedback for the platform and experience.</p>
                     </div>
-                </div>
-                <a href="/parent/dashboard" class="rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-100">
-                    Dashboard
-                </a>
+                </div>                
             </div>
 
             <div class="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xl">

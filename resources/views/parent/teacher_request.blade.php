@@ -22,9 +22,6 @@
                         <p class="text-sm text-gray-500">မိဘများ သင်ကြားရေးလိုအပ်ချက်ကို တောင်းဆိုရန်</p>
                     </div>
                 </div>
-                <a href="{{ route('parent.dashboard') }}" class="rounded-lg border border-green-300 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-100">
-                    Parent Dashboard
-                </a>
             </div>
 
             <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">

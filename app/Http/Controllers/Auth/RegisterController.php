@@ -21,7 +21,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($validated);
-        $user->userRole()->associate(UserRole::where('role', 'parent')->firstOrFail());
+        $user->userRole()->associate(UserRole::where('role', 'basic')->firstOrFail());
         $user->save();
 
         event(new Registered($user));

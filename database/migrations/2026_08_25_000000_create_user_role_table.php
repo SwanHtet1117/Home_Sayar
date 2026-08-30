@@ -16,6 +16,7 @@ return new class extends Migration
         });
 
         DB::table('user_role')->insert([
+            ['role' => 'basic', 'created_at' => now(), 'updated_at' => now()],
             ['role' => 'parent', 'created_at' => now(), 'updated_at' => now()],
             ['role' => 'teacher', 'created_at' => now(), 'updated_at' => now()],
             ['role' => 'admin', 'created_at' => now(), 'updated_at' => now()],

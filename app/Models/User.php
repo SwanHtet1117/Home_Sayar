@@ -48,6 +48,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->userRole?->role;
     }
 
+    public function canApplyForRole(string $role): bool
+    {
+        return $this->hasVerifiedEmail();
+    }
+
+    public function canAccessRoleFeature(string $role): bool
+    {
+        return $this->hasVerifiedEmail() && $this->role === $role;
+    }
+
     /**
      * Get the attributes that should be cast.
      *
