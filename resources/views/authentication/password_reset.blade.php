@@ -33,6 +33,11 @@
                     </button>
                 </div>
             </form>
+            <div class="text-center">
+                <a href="{{ route('login') }}" class="text-sm font-medium text-green-600 hover:text-green-500 transition-colors">
+                    Back to login
+                </a>
+            </div>
             </div>
         </div>
     </div>

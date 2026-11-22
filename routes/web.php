@@ -125,7 +125,7 @@ Route::middleware(['web'])->group(function () {
             }
 
             abort_unless(
-                $request->user()->role === 'parent',
+                $request->user()->canAccessRoleFeature('parent'),
                 403,
                 'Only verified parent users can access the parent dashboard.'
             );
@@ -143,8 +143,12 @@ Route::middleware(['web'])->group(function () {
                 'Your account must be verified before creating a parent profile.'
             );
 
-            return view('parent.profile_create');
+            $cities = DB::table('cities')->orderBy('name')->get();
+            $townships = DB::table('townships')->orderBy('name')->get();
+
+            return view('parent.profile_create', compact('cities', 'townships'));
         })->name('parent.profile.create');
+        Route::post('/parent/profile/create', [ParentProfileController::class, 'store'])->name('parent.profile.store');
         Route::get('/parent/profile/settings', [ParentProfileController::class, 'edit'])->name('parent.profile.settings');
         Route::put('/parent/profile/settings', [ParentProfileController::class, 'update'])->name('parent.profile.update');
         Route::get('/parent/teacher_request', function (Request $request) {
@@ -218,7 +222,7 @@ Route::middleware(['web'])->group(function () {
             }
 
             abort_unless(
-                $request->user()->role === 'teacher',
+                $request->user()->canAccessRoleFeature('teacher'),
                 403,
                 'Only verified teacher users can access the teacher dashboard.'
             );

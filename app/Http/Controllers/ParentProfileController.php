@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ParentProfile;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,6 +22,57 @@ class ParentProfileController extends Controller
         $townships = DB::table('townships')->orderBy('name')->get();
 
         return view('parent.profile_settings', compact('profile', 'cities', 'townships'));
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        abort_unless($user->hasVerifiedEmail() && $user->canApplyForRole('parent'), 403);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:30'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'address' => ['required', 'string'],
+            'region' => ['required', 'string', 'max:255', 'exists:cities,name'],
+            'township' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::exists('townships', 'name')->where(function ($query) use ($request) {
+                    $cityId = DB::table('cities')->where('name', $request->input('region'))->value('id');
+
+                    $query->where('city_id', $cityId);
+                }),
+            ],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'google_map_location' => ['nullable', 'url', 'max:255'],
+            'terms_agreed' => ['accepted'],
+        ]);
+
+        $profile = $user->parentProfile()->firstOrNew(['user_id' => $user->id]);
+        $profile->fill([
+            'user_id' => $user->id,
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'email' => $validated['email'],
+            'address' => $validated['address'],
+            'region' => $validated['region'],
+            'township' => $validated['township'],
+            'latitude' => $validated['latitude'] ?? null,
+            'longitude' => $validated['longitude'] ?? null,
+            'google_map_location' => $validated['google_map_location'] ?? null,
+        ]);
+        $profile->save();
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->userRole()->associate(UserRole::where('role', 'parent')->firstOrFail());
+        $user->save();
+
+        return redirect()->route('parent.dashboard')->with('success', 'Your parent profile has been created successfully.');
     }
 
     public function update(Request $request): RedirectResponse

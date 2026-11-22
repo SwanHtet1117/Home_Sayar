@@ -30,4 +30,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/conf-ava
 # Folder Permissions ပေးခြင်း
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Startup script ထည့်သွင်းခြင်း
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
 EXPOSE 80
+CMD ["/usr/local/bin/start.sh"]

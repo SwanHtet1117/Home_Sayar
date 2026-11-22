@@ -8,9 +8,9 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/home_sayar_logo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="relative z-0">
     @include('partials.navigation')
-    <div class="p-6 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
+    <div class="relative z-10 p-6 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
         <div class="max-w-3xl mx-auto">
             <div class="flex items-center mb-6">
                 <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -24,27 +24,28 @@
                     <h3 class="text-xl font-bold text-white">ပရိုဖိုင်း အချက်အလက်များ ဖြည့်ပါ</h3>
                 </div>
                 <div class="p-6">
-                    <form class="space-y-6">
+                    <form method="POST" action="{{ route('parent.profile.store') }}" class="space-y-6">
+                        @csrf
                         <!-- Personal Information -->
                         <div class="bg-gray-50 rounded-xl p-4">
                             <label class="block text-sm font-semibold text-gray-700 mb-3">ကိုယ်ရေးကိုယ်တာ အချက်အလက်များ</label>
                             
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">အမည်</label>
-                                    <input type="text" placeholder="အမည်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Name အမည်</label>
+                                    <input name="name" type="text" value="{{ old('name', auth()->user()->name ?? '') }}" placeholder="အမည်ဖြည့်ပါ" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">ဖုန်းနံပါတ်</label>
-                                    <input type="tel" placeholder="09-xxxxxxxxx" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Phone ဖုန်းနံပါတ်</label>
+                                    <input name="phone" type="tel" value="{{ old('phone') }}" placeholder="09-xxxxxxxxx" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">အီးမေးလ်</label>
-                                    <input type="email" placeholder="example@gmail.com" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <input name="email" type="email" value="{{ old('email', auth()->user()->email ?? '') }}" readonly class="w-full bg-gray-100 px-4 py-3 rounded-lg border border-green-300 text-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 shadow-sm">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">နေရပ်လိပ်စာ</label>
-                                    <textarea rows="2" placeholder="နေရပ်လိပ်စာဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm resize-none"></textarea>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Address နေရပ်လိပ်စာ</label>
+                                    <textarea name="address" rows="2" placeholder="နေရပ်လိပ်စာဖြည့်ပါ" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm resize-none">{{ old('address') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -55,61 +56,37 @@
                             
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">တိုင်း/ဒေသ</label>
-                                    <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                                        <option value="">တိုင်း/ဒေသရွေးချယ်ပါ</option>
-                                        <option value="yangon">ရန်ကုန်တိုင်း</option>
-                                        <option value="mandalay">မန္တလေးတိုင်း</option>
-                                        <option value="bago">ပဲခူးတိုင်း</option>
-                                        <option value="ayeyarwady">ဧရာဝတီတိုင်း</option>
-                                        <option value="sagaing">စစ်ကိုင်းတိုင်း</option>
-                                        <option value="tanintharyi">တနင်္သာရီတိုင်း</option>
-                                        <option value="kachin">ကချင်ပြည်နယ်</option>
-                                        <option value="kayah">ကယားပြည်နယ်</option>
-                                        <option value="kayin">ကရင်ပြည်နယ်</option>
-                                        <option value="chin">ချင်ပြည်နယ်</option>
-                                        <option value="mon">မွန်ပြည်နယ်</option>
-                                        <option value="rakhine">ရခိုင်ပြည်နယ်</option>
-                                        <option value="shan">ရှမ်းပြည်နယ်</option>
-                                        <option value="naypyidaw">နေပြည်တော်</option>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">City တိုင်း/ပြည်နယ်</label>
+                                    <select id="city" name="region" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <option value="">Select City</option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->name }}" data-city-id="{{ $city->id }}" {{ old('region') == $city->name ? 'selected' : '' }}>{{ $city->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">မြို့နယ်</label>
-                                    <select class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
-                                        <option value="">မြို့နယ်ရွေးချယ်ပါ</option>
-                                        <option value="kamaryut">ကမာရွတ်</option>
-                                        <option value="hlaing">လှိုင်</option>
-                                        <option value="bahan">ဗဟန်း</option>
-                                        <option value="yankin">ရန်ကင်း</option>
-                                        <option value="mayangone">မရမ်းကုန်း</option>
-                                        <option value="thingangyun">သင်္ဃန်းကျွန်း</option>
-                                        <option value="lanmadaw">လမ်းမတော်</option>
-                                        <option value="latha">လသာ</option>
-                                        <option value="pabedan">ပန်းဘဲတန်း</option>
-                                        <option value="kyauktada">ကျောက်တံတား</option>
-                                        <option value="pazundaung">ပဇွန်တောင်</option>
-                                        <option value="dagon">ဒဂုံ</option>
-                                        <option value="northdagon">ဒဂုံမြောက်ပိုင်း</option>
-                                        <option value="southdagon">ဒဂုံတောင်ပိုင်း</option>
-                                        <option value="eastdagon">ဒဂုံအရှေ့ပိုင်း</option>
-                                        <option value="seikkan">ဆိပ်ကမ်း</option>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Towhship မြို့နယ်</label>
+                                    <select id="township" name="township" required class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <option value="">Select Township</option>
+                                        @foreach ($townships as $township)
+                                            <option value="{{ $township->name }}" data-city-id="{{ $township->city_id }}" {{ old('township') == $township->name ? 'selected' : '' }}>{{ $township->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-600 mb-1">Latitude (လတ္တီတွဒ်)</label>
-                                        <input type="text" id="latitude" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <input name="latitude" type="text" id="latitude" value="{{ old('latitude') }}" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-600 mb-1">Longitude (လောင်ဂျီတွဒ်)</label>
-                                        <input type="text" id="longitude" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <input name="longitude" type="text" id="longitude" value="{{ old('longitude') }}" placeholder="Click Get Location to auto-fill" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">Google Map Location</label>
                                     <div class="flex space-x-2">
-                                        <input type="text" id="googleMapLocation" placeholder="Click on map to pick location or paste Google Maps link" class="flex-1 px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                        <input name="google_map_location" type="text" id="googleMapLocation" value="{{ old('google_map_location') }}" placeholder="Click on map to pick location or paste Google Maps link" class="flex-1 px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
                                         <button type="button" onclick="getCurrentLocation()" class="px-4 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
                                             Use Current Location
                                         </button>
@@ -117,7 +94,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-600 mb-1">Pick Your Location on Map</label>
-                                    <div id="map" class="w-full h-64 rounded-lg border border-green-300 bg-gray-100"></div>
+                                    <div id="map" class="relative z-0 w-full h-64 rounded-lg border border-green-300 bg-gray-100"></div>
                                     <p class="text-xs text-gray-500 mt-1">Click anywhere on the map to select your location</p>
                                 </div>
                             </div>
@@ -129,23 +106,26 @@
                             
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">စကားဝှက်</label>
-                                    <input type="password" placeholder="စကားဝှက်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Password စကားဝှက်</label>
+                                    <input id="password" type="password" placeholder="စကားဝှက်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <p id="passwordError" class="mt-1 hidden text-sm text-red-600">Password does not match the current account password.</p>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1">စကားဝှက် အတည်ပြုပါ</label>
-                                    <input type="password" placeholder="စကားဝှက်ပြန်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <label class="block text-sm font-medium text-gray-600 mb-1">Confirm Password စကားဝှက် အတည်ပြုပါ</label>
+                                    <input id="confirmPassword" type="password" placeholder="စကားဝှက်ပြန်ဖြည့်ပါ" class="w-full px-4 py-3 rounded-lg border border-green-300 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:border-transparent transition-all duration-200 hover:border-green-400 shadow-sm">
+                                    <p id="confirmPasswordError" class="mt-1 hidden text-sm text-red-600">Passwords do not match the current account password.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Terms and Conditions -->
                         <div class="flex items-start">
-                            <input type="checkbox" id="terms" class="h-5 w-5 rounded text-green-600 focus:ring-green-500 cursor-pointer mt-0.5">
+                            <input name="terms_agreed" type="checkbox" id="terms" value="1" class="h-5 w-5 rounded text-green-600 focus:ring-green-500 cursor-pointer mt-0.5">
                             <label for="terms" class="ml-3 text-sm text-gray-700 cursor-pointer">
                                 ကျွန်ုပ်သည် <a href="#" class="text-green-600 hover:text-green-800 underline">အသုံးပြုသူစည်းမျဉ်း</a> နှင့် <a href="#" class="text-green-600 hover:text-green-800 underline">ကိုယ်ရေးကိုယ်တာမူဝါဒ</a> တို့ကို လက်ခံသည်
                             </label>
                         </div>
+                        <p id="termsError" class="hidden text-sm text-red-600">Please accept the Terms and Conditions before continuing.</p>
 
                         <!-- Submit Button -->
                         <div class="flex justify-end space-x-4">
@@ -172,10 +152,122 @@
     @include('partials.footer')
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        .leaflet-pane,
+        .leaflet-control,
+        .leaflet-top,
+        .leaflet-bottom {
+            z-index: 0 !important;
+        }
+        .leaflet-container {
+            z-index: 0 !important;
+            position: relative;
+        }
+    </style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         let map;
         let marker;
+
+        const citySelect = document.getElementById('city');
+        const townshipSelect = document.getElementById('township');
+        const form = document.querySelector('form');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const termsCheckbox = document.getElementById('terms');
+        const termsError = document.getElementById('termsError');
+
+        function setFieldError(element, errorElement, message) {
+            if (element) {
+                element.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                element.classList.remove('border-green-300');
+            }
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.remove('hidden');
+            }
+        }
+
+        function clearFieldError(element, errorElement) {
+            if (element) {
+                element.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                element.classList.add('border-green-300');
+            }
+            if (errorElement) {
+                errorElement.classList.add('hidden');
+                errorElement.textContent = '';
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            clearFieldError(passwordInput, passwordError);
+            clearFieldError(confirmPasswordInput, confirmPasswordError);
+            termsError.classList.add('hidden');
+
+            if (passwordInput.value.trim() && confirmPasswordInput.value.trim() && passwordInput.value !== confirmPasswordInput.value) {
+                setFieldError(passwordInput, passwordError, 'Password does not match the current account password.');
+                setFieldError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match the current account password.');
+                isValid = false;
+            }
+
+            if (!termsCheckbox.checked) {
+                termsError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        form.addEventListener('submit', function(event) {
+            if (!validateForm()) {
+                event.preventDefault();
+            }
+        });
+
+        [passwordInput, confirmPasswordInput].forEach(function(input) {
+            input.addEventListener('input', function() {
+                if (passwordInput.value && confirmPasswordInput.value && passwordInput.value === confirmPasswordInput.value) {
+                    clearFieldError(passwordInput, passwordError);
+                    clearFieldError(confirmPasswordInput, confirmPasswordError);
+                }
+            });
+        });
+
+        termsCheckbox.addEventListener('change', function() {
+            if (termsCheckbox.checked) {
+                termsError.classList.add('hidden');
+            }
+        });
+
+        function filterTownships() {
+            const cityId = citySelect.options[citySelect.selectedIndex]?.dataset.cityId;
+
+            Array.from(townshipSelect.options).forEach(function(option) {
+                if (!option.value) {
+                    option.hidden = false;
+                    return;
+                }
+
+                const isVisible = option.dataset.cityId === cityId;
+                option.hidden = !isVisible;
+            });
+
+            if (cityId === undefined || cityId === '') {
+                townshipSelect.value = '';
+                townshipSelect.disabled = true;
+                return;
+            }
+
+            townshipSelect.disabled = false;
+
+            if (!Array.from(townshipSelect.options).some(option => option.value && option.dataset.cityId === cityId && option.value === townshipSelect.value)) {
+                townshipSelect.value = '';
+            }
+        }
 
         function initMap() {
             // Initialize map with default center (will be updated with device location if available)
@@ -263,6 +355,10 @@
                     break;
             }
         }
+
+        citySelect.addEventListener('change', filterTownships);
+        townshipSelect.disabled = true;
+        filterTownships();
 
         // Initialize map when page loads
         window.onload = initMap;
