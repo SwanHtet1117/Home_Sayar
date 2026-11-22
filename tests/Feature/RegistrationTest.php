@@ -21,8 +21,8 @@ class RegistrationTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'New User',
             'email' => 'new-user@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         $response->assertRedirect(route('verification.notice'));
@@ -33,7 +33,7 @@ class RegistrationTest extends TestCase
         ]);
         $this->assertSame('basic', User::query()->firstOrFail()->role);
         $this->assertNull(User::query()->firstOrFail()->email_verified_at);
-        $this->assertTrue(Hash::check('password', User::query()->firstOrFail()->password));
+        $this->assertTrue(Hash::check('Password1!', User::query()->firstOrFail()->password));
         Notification::assertSentTo(User::query()->firstOrFail(), VerifyEmail::class);
     }
 
@@ -80,8 +80,8 @@ class RegistrationTest extends TestCase
         $response = $this->from('/register')->post('/register', [
             'name' => 'Another User',
             'email' => 'existing@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         $response->assertRedirect('/register');

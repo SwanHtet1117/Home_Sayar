@@ -19,7 +19,7 @@
                         Please sign in to your account
                     </p>
                 </div>
-                <form class="mt-8 space-y-6" action="{{ route('login') }}" method="POST">
+                <form class="mt-8 space-y-6" action="{{ route('login.store') }}" method="POST">
                     @csrf
                     @if ($errors->any())
                         <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700" role="alert">

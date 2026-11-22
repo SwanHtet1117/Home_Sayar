@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\AccountProfileController;
+use App\Http\Controllers\Auth\AccountPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ParentProfileController;
 use App\Http\Controllers\TeacherProfileController;
@@ -65,14 +68,19 @@ Route::middleware(['web'])->group(function () {
     // 2. Authentication Routes (Guest Only)
     Route::middleware('guest')->group(function () {
         Route::get('/login', function () { return view('authentication.login'); })->name('login');
-        Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+        Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:6,1')->name('login.store');
+        Route::get('/login/otp', [LoginController::class, 'showOtpForm'])->name('login.otp');
+        Route::post('/login/otp', [LoginController::class, 'verifyOtp'])->middleware('throttle:10,1')->name('login.otp.verify');
+        Route::post('/login/otp/resend', [LoginController::class, 'resendOtp'])->middleware('throttle:6,1')->name('login.otp.resend');
 
         Route::get('/register', function () { return view('authentication.register'); })->name('register');
-        Route::post('/register', [RegisterController::class, 'store']);
+        Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
         Route::get('/password/reset', function () { return view('authentication.password_reset'); })->name('password.request');
+        Route::post('/password/reset', [PasswordResetController::class, 'sendResetLink'])->middleware('throttle:6,1')->name('password.email');
         Route::get('/password/reset/verify', function () { return view('authentication.password_reset_email_verify'); })->name('password.reset.email.verify');
-        Route::get('/password/reset/confirm', function () { return view('authentication.password_reset_confirm'); })->name('password.reset.confirm');
+        Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+        Route::post('/password/reset/update', [PasswordResetController::class, 'reset'])->middleware('throttle:10,1')->name('password.update');
     });
 
     // 3. Email Verification Routes
@@ -91,6 +99,10 @@ Route::middleware(['web'])->group(function () {
     // 4. Authenticated Protected Routes (Requires Login)
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+        Route::get('/account/profile', [AccountProfileController::class, 'edit'])->name('account.profile.edit');
+        Route::put('/account/profile', [AccountProfileController::class, 'update'])->name('account.profile.update');
+        Route::get('/account/settings/password', [AccountPasswordController::class, 'edit'])->name('account.password.edit');
+        Route::put('/account/settings/password', [AccountPasswordController::class, 'update'])->name('account.password.update');
 
         // Admin Routes
         Route::get('/admin/dashboard', function (Request $request) {

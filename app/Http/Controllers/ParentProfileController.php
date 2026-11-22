@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class ParentProfileController extends Controller
@@ -101,7 +102,7 @@ class ParentProfileController extends Controller
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'google_map_location' => ['nullable', 'url', 'max:255'],
             'profile_photo' => ['nullable', 'image', 'max:2048'],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'password' => ['nullable', 'string', Password::defaults(), 'confirmed'],
         ]);
 
         $profile = $user->parentProfile ?? new ParentProfile(['user_id' => $user->id]);

@@ -18,7 +18,7 @@
                 <p class="mt-2 text-center text-sm text-gray-600">
                     Please enter your email to receive a password reset link
                 </div>
-                <form class="mt-8 space-y-6" action="{{ route('password.reset.email.verify') }}" method="POST">
+                <form class="mt-8 space-y-6" action="{{ route('password.email') }}" method="POST">
                 @csrf
                 <div class="space-y-4">
                     <div>

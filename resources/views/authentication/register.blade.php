@@ -19,7 +19,7 @@
                         Please fill in the details to register
                     </p>
                 </div>
-                <form class="mt-8 space-y-6" action="{{ route('register') }}" method="POST">
+                <form class="mt-8 space-y-6" action="{{ route('register.store') }}" method="POST">
                 @csrf
                 @if ($errors->any())
                     <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700" role="alert">
@@ -47,14 +47,15 @@
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="new-password" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Password">
+                        <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Password">
                         @error('password')
                             <p id="password-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
+                        <p class="mt-1 text-xs text-gray-500">Use at least 8 characters, including an uppercase letter, a lowercase letter, a number, and a special character.</p>
                     </div>
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                        <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required @error('password_confirmation') aria-invalid="true" aria-describedby="password-confirmation-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password_confirmation') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Confirm Password">
+                        <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" minlength="8" required @error('password_confirmation') aria-invalid="true" aria-describedby="password-confirmation-error" @enderror class="appearance-none relative block w-full px-4 py-3 border placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none transition-all duration-200 @error('password_confirmation') border-red-500 focus:ring-2 focus:ring-red-500 hover:border-red-500 @else border-green-300 focus:ring-2 focus:ring-green-500 focus:border-transparent hover:border-green-400 @enderror" placeholder="Confirm Password">
                         @error('password_confirmation')
                             <p id="password-confirmation-error" class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror

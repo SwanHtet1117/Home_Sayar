@@ -57,27 +57,75 @@
                 </div>
                 <!-- account dropdown -->
                 <div class="group relative">
-                    <button type="button" aria-label="Open account menu for {{ auth()->user()->name }}" class="flex items-center rounded-full bg-green-500 px-3 py-1 text-white transition hover:bg-green-600 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); positionDropdown(this, this.nextElementSibling)">
+                    <button type="button" aria-label="Open account menu for {{ auth()->user()->name }}" class="flex items-center rounded-full bg-green-500 px-3 py-1 text-white transition hover:bg-green-600 focus:outline-none" onmouseenter="positionDropdown(this, this.nextElementSibling, 'right')" onfocus="positionDropdown(this, this.nextElementSibling, 'right')" onclick="this.nextElementSibling.classList.toggle('hidden'); positionDropdown(this, this.nextElementSibling, 'right')">
                         <span class="mr-2">{{ Str::before(trim(auth()->user()->name), ' ') }}</span>
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 26 26">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="fixed z-50 mt-1 hidden min-w-[200px] rounded-2xl border border-green-200 bg-white p-1 shadow-xl group-hover:block group-focus-within:block">
+                    <div class="fixed z-50 mt-1 hidden w-56 rounded-2xl border border-green-200 bg-white p-1 shadow-xl group-hover:block group-focus-within:block">
                         @if(auth()->user()->role === 'teacher')
-                            <a href="{{ route('teacher.dashboard') }}" class="block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Dashboard</a>
-                            <a href="{{ route('teacher.profile.detail') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Profile</a>
+                            <a href="{{ route('teacher.dashboard') }}" class="flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path>
+                                </svg>
+                                Dashboard
+                            </a>
+                            <a href="{{ route('teacher.profile.detail') }}" class="mt-1 flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Profile
+                            </a>
                         @elseif(auth()->user()->role === 'parent')
-                            <a href="{{ route('parent.dashboard') }}" class="block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Dashboard</a>
-                            <a href="{{ route('parent.profile.settings') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Profile</a>
+                            <a href="{{ route('parent.dashboard') }}" class="flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path>
+                                </svg>
+                                Dashboard
+                            </a>
+                            <a href="{{ route('parent.profile.settings') }}" class="mt-1 flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Profile
+                            </a>
                         @elseif(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.dashboard') }}" class="block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Dashboard</a>
-                            <a href="{{ route('admin.users') }}" class="mt-1 block rounded-lg px-2 py-1 text-sm transition hover:bg-green-50 hover:text-green-700">Manage Users</a>
+                            <a href="{{ route('admin.dashboard') }}" class="flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path>
+                                </svg>
+                                Dashboard
+                            </a>
+                            <a href="{{ route('account.profile.edit') }}" class="mt-1 flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Profile
+                            </a>
+                            <a href="{{ route('admin.users') }}" class="mt-1 flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Manage Users
+                            </a>
                         @endif
+                            <a href="{{ route('account.password.edit') }}" class="mt-1 flex items-center rounded-lg px-2 py-2 text-sm transition hover:bg-green-50 hover:text-green-700">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317a1.724 1.724 0 013.35 0 1.724 1.724 0 002.573 1.006 1.724 1.724 0 012.37 2.37 1.724 1.724 0 001.006 2.573 1.724 1.724 0 010 3.35 1.724 1.724 0 00-1.006 2.573 1.724 1.724 0 01-2.37 2.37 1.724 1.724 0 00-2.573 1.006 1.724 1.724 0 01-3.35 0 1.724 1.724 0 00-2.573-1.006 1.724 1.724 0 01-2.37-2.37 1.724 1.724 0 00-1.006-2.573 1.724 1.724 0 010-3.35 1.724 1.724 0 001.006-2.573 1.724 1.724 0 012.37-2.37 1.724 1.724 0 002.573-1.006z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                Settings
+                            </a>
                         <hr class="my-1 border-gray-200">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="w-full text-left rounded-lg px-2 py-1 text-sm text-red-600 transition hover:bg-red-50">Logout</button>
+                            <button type="submit" class="flex w-full items-center rounded-lg px-2 py-2 text-left text-sm text-red-600 transition hover:bg-red-50">
+                                <svg class="mr-2 h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                </svg>
+                                Logout
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -93,10 +141,18 @@
 @endif
 
 <script>
-    function positionDropdown(button, dropdown) {
+    function positionDropdown(button, dropdown, align = 'left') {
         const buttonRect = button.getBoundingClientRect();
-        dropdown.style.left = buttonRect.left + 'px';
         dropdown.style.top = (buttonRect.bottom + 8) + 'px';
+
+        if (align === 'right') {
+            dropdown.style.left = 'auto';
+            dropdown.style.right = Math.max(window.innerWidth - buttonRect.right, 12) + 'px';
+            return;
+        }
+
+        dropdown.style.right = 'auto';
+        dropdown.style.left = buttonRect.left + 'px';
     }
 
     document.addEventListener('click', function(event) {
